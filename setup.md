@@ -7,10 +7,10 @@ description: Local development and setup instructions for Industrial Insight.
 
 ## Prerequisites
 
-- .NET SDK (version matching the `backend/` solution's target framework)
-- Node.js and npm (for the `frontend/` Vite + React app)
+- .NET SDK (version matching `server/server.csproj`'s target framework — currently .NET 10)
+- Node.js and npm (for the `client/` Vite + React app)
 - SQL Server (local instance, e.g. SQL Server Developer Edition or LocalDB)
-- Visual Studio (recommended for `backend/`) and/or VS Code (recommended for `frontend/`)
+- Visual Studio (recommended for `server/`) and/or VS Code (recommended for `client/`)
 
 ## 1. Clone the repository
 
@@ -19,10 +19,10 @@ git clone <repository-url>
 cd industrial-insight
 ```
 
-## 2. Backend setup
+## 2. Backend setup (`server/`)
 
 ```bash
-cd backend
+cd server
 dotnet restore
 ```
 
@@ -31,7 +31,7 @@ dotnet restore
 Set the SQL Server connection string via **.NET User Secrets** (not hardcoded, not committed):
 
 ```bash
-cd IndustrialInsight.Api
+cd server
 dotnet user-secrets init
 dotnet user-secrets set "ConnectionStrings:DefaultConnection" "<your-connection-string>"
 ```
@@ -40,7 +40,10 @@ If the optional AI-assisted incident assessment is enabled with an external prov
 
 ### Run migrations
 
+From `server/`:
+
 ```bash
+dotnet ef migrations add InitialCreate   # first time only
 dotnet ef database update
 ```
 
@@ -53,17 +56,18 @@ Seed data for `Roles` and at least one `Manager` account is applied automaticall
 ### Run the backend
 
 ```bash
-dotnet run --project IndustrialInsight.Api
+cd server
+dotnet run
 ```
 
 The API should now be available (default ASP.NET Core dev port, typically `https://localhost:5001` or similar — confirm against `launchSettings.json`).
 
 Swagger/OpenAPI UI is available at `/swagger` for manual endpoint testing, matching the endpoints documented in [api-contract.md](api-contract.md).
 
-## 3. Frontend setup
+## 3. Frontend setup (`client/`)
 
 ```bash
-cd frontend
+cd client
 npm install
 npm run dev
 ```

@@ -9,6 +9,8 @@ description: System architecture and technical design for Industrial Insight.
 
 Industrial Insight is a full-stack web application consisting of a React frontend, an ASP.NET Core Web API backend, a SQL Server database, an embedded C# telemetry ingestion pipeline, and an optional, pluggable AI-assisted incident assessment layer.
 
+> **Repository layout note:** "backend" and "frontend" below refer to roles, not folder names. In the repository, the backend lives in `server/` and the frontend in `client/`. See [setup.md](setup.md) for exact paths and commands.
+
 The system is built around one continuous data and operational flow:
 
 **Machine telemetry + incident reports → data quality validation → priority scoring → AI-assisted assessment (optional) → maintenance action → resolution & analytics**

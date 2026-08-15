@@ -37,16 +37,40 @@ AI-specific tests are **not required** if the optional AI feature is not impleme
 
 ## Running the Tests
 
+The current solution structure (`server/server.csproj`) is a single project rather than a multi-project split — a deliberate, pragmatic choice for a solo 18-day project (see `decisions/` if this warrants its own ADR later). Testing can proceed either way; pick whichever fits how far the project has grown:
+
+### Option A — Tests inside `server/` (simplest, good starting point)
+
+Add a `Tests/` folder directly inside `server/` and reference xUnit via the same `server.csproj`, or add xUnit as a package reference to the existing project. Run with:
+
 ```bash
-cd backend
+cd server
 dotnet test
 ```
 
-Run a specific test project if the solution contains more than one:
+This is the lowest-friction option and is a reasonable place to start — no new project to wire up, no project references to maintain.
+
+### Option B — Separate test project (`server.Tests/`)
+
+If the test suite grows large enough that mixing test code into the main project feels awkward, split it out:
 
 ```bash
-dotnet test IndustrialInsight.Tests
+cd server
+dotnet new xunit -o ../server.Tests
+cd ../server.Tests
+dotnet add reference ../server/server.csproj
 ```
+
+Then run with:
+
+```bash
+cd server.Tests
+dotnet test
+```
+
+Update the solution file (`industrial-insight.slnx`) to include the new project either way, so `dotnet test` from the repository root (if run that way) picks it up.
+
+**Recommendation for this project's scope:** start with Option A. With ~6–10 critical tests, a separate test project is unlikely to pay for its own setup cost within the 18-day timeline. Revisit only if the test suite genuinely becomes unwieldy inside `server/`.
 
 ## Acceptance Criteria Reference
 
