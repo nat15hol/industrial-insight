@@ -201,10 +201,10 @@ At a high level, Industrial Insight consists of:
 
 For the detailed architecture, see:
 
-- [Architecture](Architecture.md)
-- [Database](DATABASE.md)
-- [API Contract](API_Contract.md)
-- [Dataset Specification](Dataset_Specification.md)
+- [Architecture](architecture.md)
+- [Database](database.md)
+- [API Contract](api-contract.md)
+- [Dataset Specification](dataset-specification.md)
 
 ## Technology Stack
 
@@ -327,7 +327,7 @@ The primary measurements are:
 
 For the complete dataset definition and validation rules, see:
 
-[Dataset Specification](Dataset_Specification.md)
+[Dataset Specification](dataset-specification.md)
 
 ## Data Quality
 
@@ -397,8 +397,8 @@ Users
 
 For the complete database design and schema, see:
 
-- [Database Documentation](DATABASE.md)
-- [ERD](ERD.md)
+- [Database Documentation](database.md)
+- [ERD](erd.md)
 
 ## User Roles
 
@@ -543,7 +543,7 @@ The data-quality percentage calculated during the pipeline execution.
 
 Detailed setup instructions are maintained separately in:
 
-`SETUP.md`
+[`setup.md`](setup.md)
 
 The documented setup should allow a developer to start the project from a clean environment, including:
 
@@ -558,7 +558,7 @@ The documented setup should allow a developer to start the project from a clean 
 
 ### Prerequisites
 
-The project requires the development environment specified in `SETUP.md`.
+The project requires the development environment specified in [`setup.md`](setup.md).
 
 Expected core dependencies include:
 
@@ -567,7 +567,7 @@ Expected core dependencies include:
 - SQL Server
 - Git
 
-**Recommended IDEs:** Visual Studio for the backend (`/backend`, C#/ASP.NET Core, EF Core migrations) and VS Code for the frontend (`/frontend`, React/TypeScript). Any editor with equivalent tooling can be used instead.
+**Recommended IDEs:** Visual Studio for the backend (`server/`, C#/ASP.NET Core, EF Core migrations) and VS Code for the frontend (`client/`, React/TypeScript). Any editor with equivalent tooling can be used instead.
 
 **No external AI API account or paid AI subscription is required for the core application.**
 
@@ -590,21 +590,19 @@ The frontend uses a `.env.example` template for its own local configuration (e.g
 
 ```
 
-Copy the example configuration into a local `.env` file and provide the required values according to the instructions in `SETUP.md`.
+Copy the example configuration into a local `.env` file and provide the required values according to the instructions in [`setup.md`](setup.md).
 
 If an external AI provider is used, its API key must be configured through User Secrets (or environment variables in production) and must never be committed to source control.
 
 Secrets and API keys must never be committed to source control.
 
-For security-related guidance, see:
-
-`SECURITY.md`
+For security-related guidance, see `security.md`. **Not yet created** — will be added once concrete security implementation exists to document (see [`known-limitations.md`](known-limitations.md)). In the meantime, baseline security measures are described in [`architecture.md`](architecture.md).
 
 ## Running the Application
 
 The exact commands for running the backend, frontend, database and pipeline are documented in:
 
-`SETUP.md`
+[`setup.md`](setup.md)
 
 The intended local development environment consists of:
 
@@ -644,7 +642,7 @@ The core incident workflow must be tested independently of AI availability.
 
 Run the tests according to the commands documented in:
 
-`TESTING.md`
+[`testing.md`](testing.md)
 
 ## Security
 
@@ -660,26 +658,29 @@ Security considerations include:
 
 The AI service, when enabled, is treated as an untrusted external dependency. AI output is validated before being used by the application.
 
-For more information:
-
-`SECURITY.md`
+For more information, see `security.md`. **Not yet created** — added once concrete security implementation exists to document. In the meantime, see [`architecture.md`](architecture.md) for the baseline security model and [`known-limitations.md`](known-limitations.md) for current status.
 
 ## Documentation
 
 The repository contains additional documentation for different aspects of the project.
 
-| **Document**                       | **Description**                                   |
-| ---------------------------------- | ------------------------------------------------- |
-| `Architecture.md`                  | System architecture and technical design          |
-| `API_Contract.md`                  | REST API contract and endpoint expectations       |
-| `DATABASE.md`                      | Database structure, relationships and persistence |
-| `Dataset_Specification.md`         | Synthetic telemetry dataset and validation rules  |
-| `DEPLOYMENT.md`                    | Deployment and operational deployment guidance    |
-| `SECURITY.md`                      | Security principles and implementation            |
-| `SETUP.md`                         | Local development and setup instructions          |
-| `TESTING.md`                       | Testing instructions and test strategy            |
-| `ERD.md`                           | Entity relationship diagram                       |
-| `Project_Product_Specification.md` | Product requirements and project specification    |
+| **Document**                              | **Description**                                                   |
+| ------------------------------------------ | ------------------------------------------------------------------ |
+| [`architecture.md`](architecture.md)       | System architecture and technical design                          |
+| [`api-contract.md`](api-contract.md)       | REST API contract and endpoint expectations                       |
+| [`database.md`](database.md)               | Database structure, relationships and persistence                 |
+| [`erd.md`](erd.md)                         | Entity relationship diagram                                       |
+| [`dataset-specification.md`](dataset-specification.md) | Synthetic telemetry dataset and validation rules      |
+| [`ui-wireframes.md`](ui-wireframes.md)     | Conceptual UI wireframes for key screens                          |
+| [`setup.md`](setup.md)                     | Local development and setup instructions                          |
+| [`testing.md`](testing.md)                 | Testing instructions and test strategy                            |
+| [`known-limitations.md`](known-limitations.md) | Known limitations and production gaps                         |
+| [`changelog.md`](changelog.md)             | Project documentation change history                              |
+| [`decisions/`](decisions/)                 | Architecture Decision Records (ADRs)                               |
+| [`project-product-specification.md`](project-product-specification.md) | Product requirements and project specification |
+| [`student-pre-project-planning-template.md`](student-pre-project-planning-template.md) | Detailed day-by-day execution plan and checkpoints |
+| `security.md`                              | **Not yet created.** Added once concrete security implementation exists to document. |
+| `deployment.md`                            | **Not yet created.** Deployment is optional/P2 scope; added only if attempted. |
 
 ## Project Scope
 
@@ -785,13 +786,11 @@ If deployment is attempted, it should only be done after the core system is stab
 
 Docker Compose is considered a P2 bonus feature and must not displace core functionality, testing, stabilization or presentation readiness.
 
-For deployment information, see:
-
-`DEPLOYMENT.md`
+For deployment information, see `deployment.md`. **Not yet created** — added only if deployment is actually attempted, consistent with its P2/bonus status.
 
 ## Known Limitations / Production Gaps
 
-This project is primarily a demonstration and educational project rather than a production industrial control system.
+This project is primarily a demonstration and educational project rather than a production industrial control system. The summary below is a snapshot — see [`known-limitations.md`](known-limitations.md) for the complete, maintained list.
 
 Known limitations include:
 
