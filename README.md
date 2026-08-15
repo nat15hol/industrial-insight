@@ -950,12 +950,17 @@ The final presentation focuses on demonstrating a coherent end-to-end system rat
 
 ## Author
 
-**[Name to be added]**
+**Henrik Oldehed**
+
+Data Engineer | Analytics Specialist — building full-stack systems end-to-end
 
 GitHub: https://github.com/nat15hol
+LinkedIn: https://www.linkedin.com/in/henrikoldehed/
+
+Full-stack student project spanning backend, frontend, database design, and data engineering: ASP.NET Core, React/TypeScript, SQL Server, and a C# ingestion pipeline combined into a single maintenance-prioritization workflow — authentication, RBAC, incident/task management, and analytics included.
 
 ## License
 
 This project is developed as a student project.
 
-License information: **[To be added]**
+Licensed under the [MIT License](LICENSE).
