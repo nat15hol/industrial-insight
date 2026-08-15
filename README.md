@@ -1,10 +1,46 @@
 # Industrial Insight
 
+![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet&logoColor=white)
+![React](https://img.shields.io/badge/React-TypeScript-61DAFB?logo=react&logoColor=white)
+![SQL Server](https://img.shields.io/badge/SQL_Server-EF_Core-CC2927?logo=microsoftsqlserver&logoColor=white)
+![Status](https://img.shields.io/badge/status-in_development-yellow)
+![License](https://img.shields.io/badge/license-TBD-lightgrey)
+
 **A maintenance prioritization platform for industrial operations**
 
 Industrial Insight helps maintenance teams identify which machines need attention first — and understand why. It combines machine telemetry, technician incident reports, and maintenance history into a single prioritization workflow, so managers can act on the most urgent problems instead of digging through scattered data sources.
 
 The system is designed to sit on top of existing operational data and workflows, adding a transparent intelligence layer rather than replacing existing tools.
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Project Status](#project-status-1)
+- [Key Features](#key-features)
+- [Architecture](#architecture)
+- [Technology Stack](#technology-stack)
+- [Data Pipeline](#data-pipeline)
+- [Data Quality](#data-quality)
+- [Database](#database)
+- [User Roles](#user-roles)
+- [Core Workflows](#core-workflows)
+- [Dashboard KPIs](#dashboard-kpis)
+- [Getting Started](#getting-started)
+- [Environment Configuration](#environment-configuration)
+- [Running the Application](#running-the-application)
+- [Testing](#testing)
+- [Security](#security)
+- [Documentation](#documentation)
+- [Project Scope](#project-scope)
+- [MVP](#mvp)
+- [Deployment](#deployment)
+- [Known Limitations / Production Gaps](#known-limitations--production-gaps)
+- [Future Improvements](#future-improvements)
+- [Project Context](#project-context)
+- [Author](#author)
+- [License](#license)
 
 ---
 
@@ -28,6 +64,38 @@ Each machine receives a transparent, explainable Priority Score based on open in
 Industrial Insight is not designed to replace an existing maintenance or CMMS system. It is designed to sit on top of existing data and workflows as a prioritization layer, helping teams decide what to work on first without requiring a full system migration.
 
 The AI-assisted incident assessment is an optional decision-support layer and is **not required for the core prioritization workflow**.
+
+---
+
+## Project Status
+
+Development runs August 17 – September 3, 2026 (18 days), with the presentation on September 4. Progress is tracked via one [GitHub Milestone](https://github.com/nat15hol/industrial-insight/milestones) per day, each scoped to a specific set of issues. This table reflects the plan at the start of development and will be updated as milestones close.
+
+| Day | Milestone | Focus | Issues | Status |
+| :-: | --- | --- | :-: | --- |
+| 1 | [Project Foundation](https://github.com/nat15hol/industrial-insight/milestone/1) | DB setup, EF Core, seed mechanism | 0/4 | ⏳ Not started |
+| 2 | [Authentication](https://github.com/nat15hol/industrial-insight/milestone/2) | Registration, login, JWT | 0/5 | ⏳ Not started |
+| 3 | [RBAC + Machines Backend](https://github.com/nat15hol/industrial-insight/milestone/3) | Role enforcement, Machine CRUD | 0/4 | ⏳ Not started |
+| 4 | [Frontend Foundation](https://github.com/nat15hol/industrial-insight/milestone/4) | Vite/React setup, routing, auth UI | 0/4 | ⏳ Not started |
+| 5 | [Machines Frontend](https://github.com/nat15hol/industrial-insight/milestone/5) | Machine list/detail views | 0/3 | ⏳ Not started |
+| 6 | [Frontend & Integration Polish](https://github.com/nat15hol/industrial-insight/milestone/6) | Cleanup & edge cases | 0/1 | ⏳ Not started |
+| 7 | [Integration Checkpoint 1](https://github.com/nat15hol/industrial-insight/milestone/7) | Foundation validation | 0/2 | ⏳ Not started |
+| 8 | [Incidents Backend](https://github.com/nat15hol/industrial-insight/milestone/8) | Incident model, create/retrieve, validation | 0/4 | ⏳ Not started |
+| 9 | [Incidents Frontend](https://github.com/nat15hol/industrial-insight/milestone/9) | Incident reporting form, list/detail views | 0/3 | ⏳ Not started |
+| 10 | [Maintenance Tasks](https://github.com/nat15hol/industrial-insight/milestone/10) | Task model, assignment, status tracking | 0/5 | ⏳ Not started |
+| 11 | [Optional AI-Assisted Assessment](https://github.com/nat15hol/industrial-insight/milestone/11) | AI service abstraction, schema validation, fallback | 0/5 | ⏳ Not started (P1, optional) |
+| 12 | [Data Pipeline: Ingestion](https://github.com/nat15hol/industrial-insight/milestone/12) | CSV ingestion, schema/duplicate validation | 0/5 | ⏳ Not started |
+| 13 | [Pipeline Transformation + Dashboard](https://github.com/nat15hol/industrial-insight/milestone/13) | Transformation, SQL Server load, minimal dashboard | 0/4 | ⏳ Not started |
+| 14 | [Vertical Slice Checkpoint 2](https://github.com/nat15hol/industrial-insight/milestone/14) | MVP validation (operational, data, AI) | 0/3 | ⏳ Not started |
+| 15 | [Integration & Stabilization](https://github.com/nat15hol/industrial-insight/milestone/15) | Integration testing, regression fixes | 0/4 | ⏳ Not started |
+| 16 | [Analytics + Dashboard](https://github.com/nat15hol/industrial-insight/milestone/16) | Full KPI set, Priority Score, dashboard UI | 0/7 | ⏳ Not started |
+| 17 | [Backend Tests + Stretch](https://github.com/nat15hol/industrial-insight/milestone/17) | xUnit test suite, optional anomaly detection | 0/5 | ⏳ Not started |
+| 18 | [Final Stabilization & Presentation Prep](https://github.com/nat15hol/industrial-insight/milestone/18) | Freeze, docs, demo rehearsal | 0/4 | ⏳ Not started |
+| 19 | — | Presentation Day | — | — |
+
+**Overall: 0 / 74 issues closed (0%)**
+
+> Per the project's Day 18 Freeze Rule, if the system is unstable at the end of Day 18, the last stable state verified at Checkpoint 2 (Day 14) becomes the presentation baseline — see [known-limitations.md](known-limitations.md).
 
 ---
 
@@ -879,6 +947,12 @@ P1.5 / P2 Stretch Features
 ```
 
 The final presentation focuses on demonstrating a coherent end-to-end system rather than maximizing the number of individual features.
+
+## Author
+
+**[Name to be added]**
+
+GitHub: https://github.com/nat15hol
 
 ## License
 
