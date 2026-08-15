@@ -60,7 +60,7 @@ cd server
 dotnet run
 ```
 
-The API should now be available (default ASP.NET Core dev port, typically `https://localhost:5001` or similar — confirm against `launchSettings.json`).
+The API should now be available at `https://localhost:7061` or `http://localhost:5017` (confirmed against `server/Properties/launchSettings.json`).
 
 Swagger/OpenAPI UI is available at `/swagger` for manual endpoint testing, matching the endpoints documented in [api-contract.md](api-contract.md).
 
@@ -87,7 +87,18 @@ To confirm the system starts cleanly from scratch (required for Checkpoint 1 and
 
 ## 5. Loading demo/telemetry data
 
-Sample CSV files for the data pipeline are in `data/telemetry/` (`sample-valid.csv`, `sample-invalid.csv`, `sample-duplicates.csv`). Trigger ingestion according to however the pipeline is invoked (manual command, endpoint, or startup routine — update this section once finalized) to populate `TelemetryRecords` and produce `PipelineRun` records.
+Sample CSV files for the data pipeline are in [`data/telemetry/`](data/telemetry/) (`sample-valid.csv`, `sample-invalid.csv`, `sample-duplicates.csv`). `sample-invalid.csv` covers a missing field, a non-numeric value, an invalid timestamp, an unknown `MachineId`, an out-of-range value, and another missing field — one issue per row, so each validation rule in [dataset-specification.md](dataset-specification.md) can be tested in isolation. `sample-duplicates.csv` includes both exact duplicates and a near-duplicate (same machine + timestamp, different readings) to confirm duplicate detection keys on machine + timestamp rather than the full row.
+
+Trigger ingestion according to however the pipeline is invoked (manual command, endpoint, or startup routine — update this section once finalized) to populate `TelemetryRecords` and produce `PipelineRun` records.
+
+## Open Implementation Details
+
+This document still has a few placeholders that depend on choices not yet made in code. Resolve these before relying on this document at Checkpoint 1:
+
+- [ ] **Seed data mechanism** — how the initial `Manager` account and `Roles` are seeded (e.g. `HasData` in `OnModelCreating`, a startup seeding routine, or a separate script). Update the "Seed data" section above once decided.
+- [ ] **Frontend API base URL variable name** — the exact Vite env variable (e.g. `VITE_API_BASE_URL`) once the frontend actually reads backend configuration. Update the "Frontend setup" section above.
+- [ ] **Pipeline trigger mechanism** — whether ingestion runs via a CLI command, a dedicated endpoint, or automatically on backend startup. Update this section above once decided.
+- [x] ~~Backend port~~ — confirmed: `https://localhost:7061` / `http://localhost:5017`, from `server/Properties/launchSettings.json`.
 
 ## Troubleshooting
 
