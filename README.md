@@ -954,13 +954,15 @@ The final presentation focuses on demonstrating a coherent end-to-end system rat
 
 Data Engineer | Analytics Specialist — building full-stack systems end-to-end
 
-GitHub: https://github.com/nat15hol
+GitHub: https://github.com/nat15hol  
+
 LinkedIn: https://www.linkedin.com/in/henrikoldehed/
 
-Full-stack student project spanning backend, frontend, database design, and data engineering: ASP.NET Core, React/TypeScript, SQL Server, and a C# ingestion pipeline combined into a single maintenance-prioritization workflow — authentication, RBAC, incident/task management, and analytics included.
+Industrial Insight is a full-stack student project spanning backend, frontend,
+database design, and data engineering, built with ASP.NET Core, React/TypeScript,
+SQL Server, and a C# telemetry ingestion pipeline.
 
 ## License
 
-This project is developed as a student project.
-
-Licensed under the [MIT License](LICENSE).
+This project is developed as a student project and is licensed under the MIT License.
+See the [LICENSE](LICENSE) file for the full license text.
