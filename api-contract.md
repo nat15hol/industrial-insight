@@ -19,10 +19,26 @@ All error responses follow a consistent shape:
 
 ```json
 {
-  "error": "string",
-  "details": "string | null"
+  "error": {
+    "code": "string",
+    "message": "string",
+    "details": [
+      { "field": "string", "reason": "string" }
+    ] | null
+  }
 }
 ```
+
+`code` is a stable machine-readable identifier the frontend can switch on without parsing text. `details` is populated for field-level validation errors (400) and `null` otherwise.
+
+| Code | HTTP Status | Meaning |
+| :--- | :-: | :--- |
+| `VALIDATION_ERROR` | 400 | One or more request fields are invalid |
+| `UNAUTHORIZED` | 401 | Missing or invalid JWT |
+| `FORBIDDEN` | 403 | Authenticated but not authorized (RBAC denial) |
+| `NOT_FOUND` | 404 | Resource not found |
+| `CONFLICT` | 409 | Resource already exists (e.g. duplicate email) |
+| `UPSTREAM_UNAVAILABLE` | 502 | Upstream dependency (e.g. AI provider) unavailable — never returned for core P0 endpoints |
 
 ---
 

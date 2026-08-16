@@ -17,7 +17,7 @@ The system is designed to sit on top of existing operational data and workflows,
 ## Table of Contents
 
 - [Overview](#overview)
-- [Project Status](#project-status-1)
+- [Project Status](#project-status)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
 - [Technology Stack](#technology-stack)
@@ -39,6 +39,7 @@ The system is designed to sit on top of existing operational data and workflows,
 - [Known Limitations / Production Gaps](#known-limitations--production-gaps)
 - [Future Improvements](#future-improvements)
 - [Project Context](#project-context)
+- [Development Strategy](#development-strategy)
 - [Author](#author)
 - [License](#license)
 
@@ -919,7 +920,7 @@ Central application logic is nevertheless reviewed and understood by the student
 
 The optional AI-assisted incident assessment is not intended to represent development or training of a custom AI model. It is an application-level integration/decision-support feature using a configurable AI service or local implementation.
 
-## Project Status
+## Development Strategy
 
 **Development period:** August 17 – September 3, 2026
 

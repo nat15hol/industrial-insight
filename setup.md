@@ -34,6 +34,7 @@ Set the SQL Server connection string via **.NET User Secrets** (not hardcoded, n
 cd server
 dotnet user-secrets init
 dotnet user-secrets set "ConnectionStrings:DefaultConnection" "<your-connection-string>"
+dotnet user-secrets set "Jwt:Secret" "<your-jwt-signing-secret>"
 ```
 
 If the optional AI-assisted incident assessment is enabled with an external provider, its API key is also configured via User Secrets (or environment variables if deployed) — never hardcoded in source. If using the local mock AI implementation, no key is required.

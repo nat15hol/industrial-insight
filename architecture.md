@@ -120,6 +120,7 @@ score = 40 × min(open_incidents / 5, 1)
 - JWT Bearer authentication on all protected endpoints.
 - **Server-side RBAC is the authority.** Frontend route/UI restrictions are a convenience layer only; every protected endpoint independently enforces role checks and, where relevant, ownership checks (e.g. a Technician may only view/update their own assigned maintenance tasks).
 - AI responses are treated as untrusted input and schema-validated before use.
+- Error responses log `code`, `path`, and a request ID server-side. `message`/`details` shown to the client are never logged with PII beyond what's already in the request body validation.
 
 Full detail in `security.md` (added once implemented — see `known-limitations.md` in the interim).
 
