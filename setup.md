@@ -73,7 +73,7 @@ npm install
 npm run dev
 ```
 
-The frontend expects the backend API base URL to be configured (e.g. via a `.env` file / Vite env variable) — update this section with the exact variable name once implemented.
+The frontend expects the backend API base URL to be configured via the `VITE_API_BASE_URL` environment variable. Copy `client/.env.example` to `client/.env` and set the value there.
 
 ## 4. Verify a clean setup
 
@@ -97,7 +97,7 @@ Trigger ingestion according to however the pipeline is invoked (manual command, 
 This document still has a few placeholders that depend on choices not yet made in code. Resolve these before relying on this document at Checkpoint 1:
 
 - [ ] **Seed data mechanism** — how the initial `Manager` account and `Roles` are seeded (e.g. `HasData` in `OnModelCreating`, a startup seeding routine, or a separate script). Update the "Seed data" section above once decided.
-- [ ] **Frontend API base URL variable name** — the exact Vite env variable (e.g. `VITE_API_BASE_URL`) once the frontend actually reads backend configuration. Update the "Frontend setup" section above.
+- [x] ~~Frontend API base URL variable name~~ — confirmed: `VITE_API_BASE_URL`, via `client/.env.example`. See "Frontend setup" above.
 - [ ] **Pipeline trigger mechanism** — whether ingestion runs via a CLI command, a dedicated endpoint, or automatically on backend startup. Update this section above once decided.
 - [x] ~~Backend port~~ — confirmed: `https://localhost:7061` / `http://localhost:5017`, from `server/Properties/launchSettings.json`.
 

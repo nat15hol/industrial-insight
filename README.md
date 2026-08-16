@@ -189,7 +189,7 @@ Technicians can:
 - Update task status
 - Complete assigned tasks
 
-## Data Pipeline
+### Data Pipeline
 
 The project includes a C# data ingestion pipeline, built into the backend, for synthetic machine telemetry.
 
