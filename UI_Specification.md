@@ -9,6 +9,12 @@ Roles referenced below are **Technician** and **Manager**, matching the rest of 
 
 Each screen section below combines a **wireframe** (visual layout — see linked SVG) with the **specification** (what's on screen, how it behaves, and edge cases). The wireframes are intentionally low-fidelity: they show structure, hierarchy, and role differences, not final visual design.
 
+## Responsive Design
+
+The interface targets desktop and tablet widths as the primary use case (a maintenance manager/technician at a workstation or tablet on the floor), with the layout remaining usable down to common tablet breakpoints (~768px). Mobile-phone-width optimization is not a primary target given the operational context, but the layout must not break outright at narrower widths — the sidebar collapses to an icon rail or hamburger menu, and tables/lists reflow to single-column stacked cards rather than requiring horizontal scroll.
+
+Implementation approach (CSS methodology, exact breakpoints, and any framework choice) is left open until frontend work begins in Day 4 — this section defines the requirement and target behavior, not the CSS implementation.
+
 ## 0. Login / Register
 
 ![Login/Register wireframe](wireframes/00-login-register.svg)
