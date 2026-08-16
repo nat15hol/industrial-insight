@@ -739,8 +739,9 @@ The repository contains additional documentation for different aspects of the pr
 | [`api-contract.md`](api-contract.md)       | REST API contract and endpoint expectations                       |
 | [`database.md`](database.md)               | Database structure, relationships and persistence                 |
 | [`erd.md`](erd.md)                         | Entity relationship diagram                                       |
+| [`sequence-diagrams.md`](sequence-diagrams.md) | Sequence diagrams for login/auth and the AI-assisted assessment flow |
 | [`dataset-specification.md`](dataset-specification.md) | Synthetic telemetry dataset and validation rules      |
-| [`ui-wireframes.md`](ui-wireframes.md)     | Conceptual UI wireframes for key screens                          |
+| [`UI_Specification.md`](UI_Specification.md) | UI layout specification and wireframes for key screens          |
 | [`setup.md`](setup.md)                     | Local development and setup instructions                          |
 | [`testing.md`](testing.md)                 | Testing instructions and test strategy                            |
 | [`known-limitations.md`](known-limitations.md) | Known limitations and production gaps                         |

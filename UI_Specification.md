@@ -1,13 +1,17 @@
 ---
-name: UI_Wireframes
-description: Conceptual UI wireframes for key screens in Industrial Insight.
+name: UI_Specification
+description: UI layout specification and wireframes for key screens in Industrial Insight.
 ---
 
-# UI Wireframes & Layouts
+# UI Specification & Wireframes
 
 Roles referenced below are **Technician** and **Manager**, matching the rest of the project documentation.
 
+Each screen section below combines a **wireframe** (visual layout — see linked SVG) with the **specification** (what's on screen, how it behaves, and edge cases). The wireframes are intentionally low-fidelity: they show structure, hierarchy, and role differences, not final visual design.
+
 ## 0. Login / Register
+
+![Login/Register wireframe](wireframes/00-login-register.svg)
 
 - **Layout:** Centered form, no sidebar/navigation (unauthenticated state).
 - **Fields:** Email, Password (login); Name, Email, Password (register).
@@ -15,6 +19,8 @@ Roles referenced below are **Technician** and **Manager**, matching the rest of 
 - **On success:** Redirect to Dashboard (or Machines list) with JWT stored in memory/context.
 
 ## 1. Dashboard (Overview)
+
+![Dashboard wireframe](wireframes/01-dashboard.svg)
 
 - **Header:** User profile, role badge (Technician/Manager), logout, notifications.
 - **Left Sidebar:** Navigation — Dashboard, Machines, Incidents, Maintenance, Pipeline (Pipeline visible to Manager only).
@@ -34,6 +40,8 @@ Roles referenced below are **Technician** and **Manager**, matching the rest of 
 
 ## 2. Machine Details
 
+![Machine Details wireframe](wireframes/02-machine-details.svg)
+
 - **Header:** Machine Name, Status badge, Location.
 - **Sidebar:** Standard navigation.
 - **Main Area:**
@@ -43,12 +51,16 @@ Roles referenced below are **Technician** and **Manager**, matching the rest of 
 
 ## 3. Incident Reporting Form (Technician)
 
+![Incident Reporting wireframe](wireframes/03-incident-reporting.svg)
+
 - **Fields:** Machine selector, Description (free text).
 - **Optional AI assistance:** If the AI-assisted assessment feature is enabled and available, after entering a description the Technician can request a suggestion. The suggestion (Category, Priority, Recommended Action, short rationale) is shown as an editable preview — the Technician can accept it as-is, edit it, or ignore it entirely before saving.
 - **Graceful degradation:** If the AI service is unavailable, disabled, or returns an invalid response, no suggestion block is shown and the form remains fully usable — the incident can still be submitted with just the description.
 - **Validation:** Machine and Description are required; inline error states for missing/invalid input.
 
 ## 4. Incident Management Screen (Manager)
+
+![Incident Management wireframe](wireframes/04-incident-management.svg)
 
 - **Main Area:**
   - **Filter Bar:** Search/filter by priority, machine, status.
@@ -58,11 +70,15 @@ Roles referenced below are **Technician** and **Manager**, matching the rest of 
 
 ## 5. Maintenance Tasks
 
+![Maintenance Tasks wireframe](wireframes/05-maintenance-tasks.svg)
+
 - **Manager view:** List of all tasks — Description, linked Incident/Machine, Assignee, Status, Created/Completed dates. Manager creates and assigns new tasks from an incident.
 - **Technician view:** List filtered to tasks assigned to the logged-in Technician only. Status update control (`To Do → Doing → Done`). A Technician cannot see or modify tasks assigned to other Technicians.
 - **Layout:** List view (Status column with dropdown/select). A calendar/due-date view is not included, since the current data model does not track a due date — task lifecycle is tracked via status and timestamps only.
 
 ## 6. Pipeline Runs (Manager)
+
+![Pipeline Runs wireframe](wireframes/06-pipeline-runs.svg)
 
 - **Main Area:**
   - **Table:** Recent `PipelineRun` entries — Started At, Finished At, Records Processed/Accepted/Rejected, Duplicates, Data-Quality %, Status.

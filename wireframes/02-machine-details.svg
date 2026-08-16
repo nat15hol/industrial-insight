@@ -1,0 +1,60 @@
+<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <rect width="1000" height="700" fill="#f5f5f5"/>
+  <text x="20" y="25" font-size="14" fill="#888">Screen 2 — Machine Details</text>
+
+  <!-- Header -->
+  <rect x="0" y="40" width="1000" height="55" fill="#222"/>
+  <text x="20" y="73" font-size="15" font-weight="bold" fill="#fff">Industrial Insight</text>
+
+  <!-- Sidebar -->
+  <rect x="0" y="95" width="180" height="605" fill="#2d2d2d"/>
+  <text x="20" y="135" font-size="12" fill="#bbb">Dashboard</text>
+  <text x="20" y="170" font-size="12" fill="#fff">■ Machines</text>
+  <text x="20" y="205" font-size="12" fill="#bbb">Incidents</text>
+  <text x="20" y="240" font-size="12" fill="#bbb">Maintenance</text>
+  <text x="20" y="275" font-size="12" fill="#bbb">Pipeline</text>
+
+  <!-- Machine header -->
+  <text x="200" y="130" font-size="20" font-weight="bold" fill="#222">Machine A</text>
+  <rect x="330" y="112" width="70" height="22" fill="#2e7d32" rx="11"/>
+  <text x="365" y="127" font-size="10" text-anchor="middle" fill="#fff">Running</text>
+  <text x="200" y="150" font-size="11" fill="#777">Location: Building 3, Line 2</text>
+
+  <!-- Action buttons (role-dependent) -->
+  <rect x="760" y="108" width="130" height="32" fill="#2b6cb0" rx="4"/>
+  <text x="825" y="128" font-size="10" text-anchor="middle" fill="#fff">Report Incident</text>
+  <text x="765" y="152" font-size="8" fill="#999" font-style="italic">(Technician)</text>
+
+  <rect x="600" y="108" width="150" height="32" fill="#eee" stroke="#999" stroke-dasharray="3,2" rx="4"/>
+  <text x="675" y="128" font-size="10" text-anchor="middle" fill="#666">Create Maintenance Task</text>
+  <text x="605" y="152" font-size="8" fill="#999" font-style="italic">(Manager, usually via incident)</text>
+
+  <!-- Telemetry chart -->
+  <text x="200" y="185" font-size="13" font-weight="bold" fill="#222">Telemetry (persisted records)</text>
+  <rect x="200" y="195" width="780" height="220" fill="#fff" stroke="#ccc" rx="3"/>
+  <!-- axes -->
+  <line x1="230" y1="380" x2="950" y2="380" stroke="#999"/>
+  <line x1="230" y1="220" x2="230" y2="380" stroke="#999"/>
+  <!-- fake line chart -->
+  <polyline points="230,340 300,300 370,320 440,260 510,290 580,230 650,270 720,240 790,300 860,260 930,280"
+            fill="none" stroke="#2b6cb0" stroke-width="2"/>
+  <polyline points="230,360 300,350 370,355 440,330 510,340 580,320 650,335 720,325 790,345 860,330 930,338"
+            fill="none" stroke="#c0392b" stroke-width="2"/>
+  <text x="960" y="270" font-size="9" fill="#2b6cb0">Temp</text>
+  <text x="960" y="335" font-size="9" fill="#c0392b">Vibration</text>
+  <text x="215" y="405" font-size="9" fill="#999">Toggle: Temperature / Pressure / Vibration / Energy</text>
+  <text x="700" y="405" font-size="9" fill="#999" font-style="italic">source: TelemetryRecords (not live stream)</text>
+
+  <!-- Activity log -->
+  <text x="200" y="435" font-size="13" font-weight="bold" fill="#222">Activity Log</text>
+  <rect x="200" y="445" width="780" height="160" fill="#fff" stroke="#ccc" rx="3"/>
+  <text x="215" y="468" font-size="10" fill="#555">[Incident] Vibration threshold exceeded — Open — reported 5h ago</text>
+  <line x1="215" y1="480" x2="965" y2="480" stroke="#eee"/>
+  <text x="215" y="500" font-size="10" fill="#555">[Maintenance] Bearing replacement — Done — completed 3d ago</text>
+  <line x1="215" y1="512" x2="965" y2="512" stroke="#eee"/>
+  <text x="215" y="532" font-size="10" fill="#555">[Incident] Sensor calibration issue — Resolved — 6d ago</text>
+  <line x1="215" y1="544" x2="965" y2="544" stroke="#eee"/>
+  <text x="215" y="564" font-size="10" fill="#555">[Maintenance] Routine lubrication — Done — 9d ago</text>
+
+  <text x="20" y="670" font-size="11" fill="#888">Note: "Create Maintenance Task" here is typically disabled/hidden — flow usually starts from an incident.</text>
+</svg>

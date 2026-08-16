@@ -1,0 +1,105 @@
+<svg viewBox="0 0 1050 700" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <rect width="1050" height="700" fill="#f5f5f5"/>
+  <text x="20" y="25" font-size="14" fill="#888">Screen 4 — Incident Management (Manager)</text>
+
+  <!-- Header -->
+  <rect x="0" y="40" width="1050" height="55" fill="#222"/>
+  <text x="20" y="73" font-size="15" font-weight="bold" fill="#fff">Industrial Insight</text>
+
+  <!-- Sidebar -->
+  <rect x="0" y="95" width="180" height="605" fill="#2d2d2d"/>
+  <text x="20" y="135" font-size="12" fill="#bbb">Dashboard</text>
+  <text x="20" y="170" font-size="12" fill="#bbb">Machines</text>
+  <text x="20" y="205" font-size="12" fill="#fff">■ Incidents</text>
+  <text x="20" y="240" font-size="12" fill="#bbb">Maintenance</text>
+  <text x="20" y="275" font-size="12" fill="#bbb">Pipeline</text>
+
+  <!-- Filter bar -->
+  <rect x="200" y="112" width="830" height="40" fill="#fff" stroke="#ccc" rx="3"/>
+  <rect x="210" y="120" width="150" height="24" fill="#fafafa" stroke="#bbb" rx="3"/>
+  <text x="225" y="136" font-size="9" fill="#999">Search...</text>
+  <rect x="370" y="120" width="110" height="24" fill="#fafafa" stroke="#bbb" rx="3"/>
+  <text x="385" y="136" font-size="9" fill="#777">Priority ▾</text>
+  <rect x="490" y="120" width="110" height="24" fill="#fafafa" stroke="#bbb" rx="3"/>
+  <text x="505" y="136" font-size="9" fill="#777">Machine ▾</text>
+  <rect x="610" y="120" width="110" height="24" fill="#fafafa" stroke="#bbb" rx="3"/>
+  <text x="625" y="136" font-size="9" fill="#777">Status ▾</text>
+
+  <!-- Table -->
+  <rect x="200" y="165" width="590" height="330" fill="#fff" stroke="#ccc" rx="3"/>
+  <rect x="200" y="165" width="590" height="26" fill="#eee"/>
+  <text x="210" y="182" font-size="9" font-weight="bold" fill="#555">Machine</text>
+  <text x="290" y="182" font-size="9" font-weight="bold" fill="#555">Description</text>
+  <text x="440" y="182" font-size="9" font-weight="bold" fill="#555">Status</text>
+  <text x="510" y="182" font-size="9" font-weight="bold" fill="#555">Priority</text>
+  <text x="580" y="182" font-size="9" font-weight="bold" fill="#555">Category</text>
+  <text x="660" y="182" font-size="9" font-weight="bold" fill="#555">Reported</text>
+  <text x="730" y="182" font-size="9" font-weight="bold" fill="#555">Created</text>
+
+  <!-- row 1 (selected) -->
+  <rect x="200" y="191" width="590" height="30" fill="#eaf2fb"/>
+  <text x="210" y="210" font-size="9" fill="#333">Machine A</text>
+  <text x="290" y="210" font-size="9" fill="#333">Vibration threshold ex...</text>
+  <text x="440" y="210" font-size="9" fill="#c0392b">Open</text>
+  <text x="510" y="210" font-size="9" fill="#333">High</text>
+  <text x="580" y="210" font-size="9" fill="#333">Mechanical</text>
+  <text x="660" y="210" font-size="9" fill="#333">tech_1</text>
+  <text x="730" y="210" font-size="9" fill="#333">5h ago</text>
+
+  <!-- row 2 -->
+  <rect x="200" y="221" width="590" height="30" fill="#fff"/>
+  <line x1="200" y1="221" x2="790" y2="221" stroke="#eee"/>
+  <text x="210" y="240" font-size="9" fill="#333">Machine C</text>
+  <text x="290" y="240" font-size="9" fill="#333">Sensor fault reported</text>
+  <text x="440" y="240" font-size="9" fill="#d0a000">InProgress</text>
+  <text x="510" y="240" font-size="9" fill="#333">Medium</text>
+  <text x="580" y="240" font-size="9" fill="#333">Sensor</text>
+  <text x="660" y="240" font-size="9" fill="#333">tech_2</text>
+  <text x="730" y="240" font-size="9" fill="#333">1d ago</text>
+
+  <!-- row 3 -->
+  <rect x="200" y="251" width="590" height="30" fill="#fff"/>
+  <line x1="200" y1="251" x2="790" y2="251" stroke="#eee"/>
+  <text x="210" y="270" font-size="9" fill="#333">Machine D</text>
+  <text x="290" y="270" font-size="9" fill="#333">Routine check flagged</text>
+  <text x="440" y="270" font-size="9" fill="#2e7d32">Resolved</text>
+  <text x="510" y="270" font-size="9" fill="#333">Low</text>
+  <text x="580" y="270" font-size="9" fill="#333">Electrical</text>
+  <text x="660" y="270" font-size="9" fill="#333">tech_1</text>
+  <text x="730" y="270" font-size="9" fill="#333">2d ago</text>
+
+  <!-- Detail panel -->
+  <rect x="805" y="165" width="225" height="490" fill="#fff" stroke="#2b6cb0" stroke-width="1.5" rx="3"/>
+  <text x="820" y="188" font-size="12" font-weight="bold" fill="#222">Incident Detail</text>
+  <text x="820" y="205" font-size="9" fill="#777">Machine A</text>
+  <text x="820" y="220" font-size="9" fill="#555">Vibration threshold exceeded</text>
+  <text x="820" y="235" font-size="9" fill="#555">on the main drive shaft.</text>
+
+  <text x="820" y="260" font-size="9" fill="#555">Priority</text>
+  <rect x="820" y="266" width="190" height="26" fill="#fafafa" stroke="#bbb" rx="3"/>
+  <text x="830" y="283" font-size="9" fill="#777">High ▾</text>
+
+  <text x="820" y="308" font-size="9" fill="#555">Category</text>
+  <rect x="820" y="314" width="190" height="26" fill="#fafafa" stroke="#bbb" rx="3"/>
+  <text x="830" y="331" font-size="9" fill="#777">Mechanical ▾</text>
+
+  <text x="820" y="356" font-size="9" fill="#555">Status</text>
+  <rect x="820" y="362" width="60" height="24" fill="#c0392b" rx="3"/>
+  <text x="850" y="378" font-size="8" text-anchor="middle" fill="#fff">Open</text>
+  <text x="887" y="378" font-size="10" fill="#999">→</text>
+  <rect x="898" y="362" width="60" height="24" fill="#eee" stroke="#999" rx="3"/>
+  <text x="928" y="378" font-size="8" text-anchor="middle" fill="#555">Progress</text>
+
+  <!-- AI reference block -->
+  <rect x="820" y="400" width="190" height="90" fill="#f0f6ff" stroke="#8fb8e8" stroke-dasharray="3,2" rx="3"/>
+  <text x="830" y="418" font-size="9" font-weight="bold" fill="#2b6cb0">AI Suggestion (reference)</text>
+  <text x="830" y="434" font-size="8" fill="#555">Category: Mechanical</text>
+  <text x="830" y="448" font-size="8" fill="#555">Priority: High</text>
+  <text x="830" y="462" font-size="8" fill="#555">Action: Inspect shaft coupling</text>
+  <text x="830" y="478" font-size="7" fill="#888" font-style="italic">shown alongside Manager's assessment</text>
+
+  <rect x="820" y="510" width="190" height="32" fill="#2b6cb0" rx="4"/>
+  <text x="915" y="530" font-size="10" text-anchor="middle" fill="#fff">Create Maintenance Task</text>
+
+  <text x="20" y="670" font-size="11" fill="#888">Note: Detail panel opens on row click; Status flow: Open → InProgress → Resolved.</text>
+</svg>
