@@ -2,7 +2,7 @@ namespace server.Models;
 
 public class TelemetryRecord
 {
-    public int TelemetryId { get; set; }
+    public int TelemetryRecordId { get; set; }
     public DateTime Timestamp { get; set; }
     public float Temperature { get; set; }
     public float Pressure { get; set; }

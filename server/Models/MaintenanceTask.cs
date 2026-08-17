@@ -2,7 +2,7 @@ namespace server.Models;
 
 public class MaintenanceTask
 {
-    public int TaskId { get; set; }
+    public int MaintenanceTaskId { get; set; }
     public string Status { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
     public DateTime? CompletedAt { get; set; }

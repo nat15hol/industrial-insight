@@ -2,7 +2,7 @@ namespace server.Models;
 
 public class PipelineRun
 {
-    public int RunId { get; set; }
+    public int PipelineRunId { get; set; }
     public DateTime StartedAt { get; set; }
     public DateTime? FinishedAt { get; set; }
     public int RecordsProcessed { get; set; }
