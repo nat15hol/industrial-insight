@@ -1,10 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using server.Data;
+using server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddOpenApi();
+builder.Services.AddControllers();
+
+builder.Services.AddScoped<AuthService>();
 
 // Entity Framework Core
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -28,6 +32,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapControllers();
 
 var summaries = new[]
 {
