@@ -12,11 +12,10 @@ public static class DbSeeder
             return;
         }
 
-        var adminRole = new Role { Name = "Admin" };
         var technicianRole = new Role { Name = "Technician" };
-        var viewerRole = new Role { Name = "Viewer" };
+        var managerRole = new Role { Name = "Manager" };
 
-        context.Roles.AddRange(adminRole, technicianRole, viewerRole);
+        context.Roles.AddRange(technicianRole, managerRole);
         context.SaveChanges();
 
         var location = new Location
@@ -28,12 +27,12 @@ public static class DbSeeder
         context.Locations.Add(location);
         context.SaveChanges();
 
-        var adminUser = new User
+        var managerUser = new User
         {
-            Name = "Admin User",
-            Email = "admin@industrialinsight.local",
+            Name = "Manager User",
+            Email = "manager@industrialinsight.local",
             PasswordHash = "placeholder-hash",
-            RoleId = adminRole.RoleId
+            RoleId = managerRole.RoleId
         };
 
         var technicianUser = new User
@@ -44,7 +43,7 @@ public static class DbSeeder
             RoleId = technicianRole.RoleId
         };
 
-        context.Users.AddRange(adminUser, technicianUser);
+        context.Users.AddRange(managerUser, technicianUser);
         context.SaveChanges();
 
         var machine = new Machine
