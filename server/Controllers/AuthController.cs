@@ -41,7 +41,11 @@ public class AuthController : ControllerBase
 
         if (result == null)
         {
-            return Unauthorized("Invalid email or password.");
+            return Unauthorized(new ErrorResponse
+            {
+                Error = "invalid_credentials",
+                Message = "Invalid email or password."
+            });
         }
 
         var user = result.Value.User;

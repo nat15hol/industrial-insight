@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using server.Data;
+using server.DTOs;
 using server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +34,54 @@ builder.Services
 
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(jwtSecret))
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                context.NoResult();
+
+                var (error, message) = context.Exception switch
+                {
+                    SecurityTokenExpiredException =>
+                        ("token_expired", "The token has expired."),
+                    SecurityTokenInvalidSignatureException =>
+                        ("invalid_token", "The token signature is invalid."),
+                    _ =>
+                        ("invalid_token", "The token is invalid.")
+                };
+
+                context.HttpContext.Items["AuthError"] = (error, message);
+
+                return Task.CompletedTask;
+            },
+            OnChallenge = async context =>
+            {
+                context.HandleResponse();
+
+                if (context.HttpContext.Items.TryGetValue("AuthError", out var value) &&
+                    value is ValueTuple<string, string> authError)
+                {
+                    await WriteAuthErrorAsync(
+                        context.Response,
+                        StatusCodes.Status401Unauthorized,
+                        authError.Item1,
+                        authError.Item2);
+
+                    return;
+                }
+
+                await WriteAuthErrorAsync(
+                    context.Response,
+                    StatusCodes.Status401Unauthorized,
+                    "missing_token",
+                    "No authentication token was provided.");
+            },
+            OnForbidden = context =>
+            {
+                return WriteAuthErrorAsync(context.Response, StatusCodes.Status403Forbidden, "forbidden", "You do not have permission to access this resource.");
+            }
         };
     });
 
@@ -88,6 +138,20 @@ app.MapGet("/weatherforecast", () =>
 .RequireAuthorization();
 
 app.Run();
+
+static async Task WriteAuthErrorAsync(HttpResponse response, int statusCode, string error, string message)
+{
+    response.StatusCode = statusCode;
+    response.ContentType = "application/json";
+
+    var body = new ErrorResponse { Error = error, Message = message };
+    var options = new JsonSerializerOptions
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
+    await response.WriteAsync(JsonSerializer.Serialize(body, options));
+}
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
