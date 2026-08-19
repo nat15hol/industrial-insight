@@ -85,7 +85,13 @@ builder.Services
         };
     });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ManagerOnly", policy =>
+        policy.RequireRole("Manager"));
+    options.AddPolicy("TechnicianOnly", policy =>
+        policy.RequireRole("Technician"));
+});
 
 // Entity Framework Core
 builder.Services.AddDbContext<AppDbContext>(options =>
