@@ -1,121 +1,103 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useEffect, useState } from 'react'
 import './App.css'
 
+type Location = {
+  locationId: number
+  name: string
+  address: string
+}
+
+type Machine = {
+  machineId: number
+  name: string
+  status: string
+  runtime: number
+  locationId: number
+  location: Location | null
+}
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [machines, setMachines] = useState<Machine[]>([])
+  const [selectedMachine, setSelectedMachine] = useState<Machine | null>(null)
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+
+    fetch(`${API_BASE_URL}/api/Machine`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status} `)
+        }
+
+        return response.json()
+      })
+      .then((data: Machine[]) => {
+        setMachines(data)
+      })
+      .catch((error) => {
+        console.error('Failed to fetch machines:', error)
+      })
+  }, [])
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <main className="machine-page">
+      <header className="page-header">
+        <h1>Machines</h1>
+        <p>Browse and inspect industrial machines.</p>
+      </header>
 
-      <div className="ticks"></div>
+      <section className="machine-layout">
+        <div className="machine-list">
+          <h2>Machine list</h2>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+          {machines.length === 0 ? (
+            <p>No machines found.</p>
+          ) : (
+            machines.map((machine) => (
+              <button
+                key={machine.machineId}
+                type="button"
+                className="machine-card"
+                onClick={() => setSelectedMachine(machine)}
+              >
+                <strong>{machine.name}</strong>
+                <span>{machine.status}</span>
+              </button>
+            ))
+          )}
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+
+        <div className="machine-detail">
+          {selectedMachine ? (
+            <>
+              <h2>{selectedMachine.name}</h2>
+
+              <dl>
+                <dt>Status</dt>
+                <dd>{selectedMachine.status}</dd>
+
+                <dt>Runtime</dt>
+                <dd>{selectedMachine.runtime}</dd>
+
+                <dt>Location</dt>
+                <dd>{selectedMachine.location?.name ?? 'Unknown'}</dd>
+
+                <dt>Address</dt>
+                <dd>{selectedMachine.location?.address ?? 'Unknown'}</dd>
+              </dl>
+            </>
+          ) : (
+            <p>Select a machine to view its details.</p>
+          )}
         </div>
       </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    </main>
   )
 }
 
