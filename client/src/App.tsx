@@ -48,7 +48,7 @@ function App() {
   return (
     <main className="machine-page">
       <header className="page-header">
-        <h1>Machines</h1>
+        <h1 className="text-4xl font-bold">Machines</h1>
         <p>Browse and inspect industrial machines.</p>
       </header>
 
