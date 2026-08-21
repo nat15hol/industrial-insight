@@ -20,6 +20,8 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 function MachinesPage() {
   const [machines, setMachines] = useState<Machine[]>([])
   const [selectedMachine, setSelectedMachine] = useState<Machine | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -38,9 +40,12 @@ function MachinesPage() {
       })
       .then((data: Machine[]) => {
         setMachines(data)
+        setIsLoading(false)
       })
       .catch((error) => {
         console.error('Failed to fetch machines:', error)
+        setError('Failed to load machines.')
+        setIsLoading(false)
       })
   }, [])
 
@@ -55,7 +60,11 @@ function MachinesPage() {
         <div className="machine-list">
           <h2>Machine list</h2>
 
-          {machines.length === 0 ? (
+          {isLoading ? (
+            <p>Loading machines...</p>
+          ) : error ? (
+            <p>{error}</p>
+          ) : machines.length === 0 ? (
             <p>No machines found.</p>
           ) : (
             machines.map((machine) => (
