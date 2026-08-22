@@ -31,7 +31,7 @@ public static class DbSeeder
         {
             Name = "Manager User",
             Email = "manager@industrialinsight.local",
-            PasswordHash = "placeholder-hash",
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Manager123!"),
             RoleId = managerRole.RoleId
         };
 
@@ -39,7 +39,7 @@ public static class DbSeeder
         {
             Name = "Test Technician",
             Email = "tech@industrialinsight.local",
-            PasswordHash = "placeholder-hash",
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Technician123!"),
             RoleId = technicianRole.RoleId
         };
 
