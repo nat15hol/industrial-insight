@@ -70,7 +70,7 @@ The AI-assisted incident assessment is an optional decision-support layer and is
 
 ## Project Status
 
-**Current status (Checkpoint 1):** MVP under development. The project has a stable technical foundation and a functioning prototype, while core product functionality is still being implemented and integrated[cite: 1].
+**Current status (Checkpoint 1):** MVP under development. The project has a stable technical foundation and a functioning prototype, while core product functionality is still being implemented and integrated.
 
 **Live status:** for up-to-date issue counts, milestone progress, and
 scope tracking, run the project dashboard locally:
