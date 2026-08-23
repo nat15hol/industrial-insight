@@ -1,0 +1,14 @@
+async function loadData() {
+  try {
+    const response = await fetch('./data.json');
+    if (!response.ok) throw new Error('Kunde inte ladda data.json');
+    const issues = await response.json();
+    
+    els.projTitle.textContent = 'industrial-insight';
+    // Använd fast datum för 'plan vs reality' så det blir konsekvent
+    render(issues, 'date', '2026-08-17');
+    els.dashboard.style.display = 'block';
+  } catch (err) {
+    console.error('Fel vid laddning av dashboard-data:', err);
+  }
+}
