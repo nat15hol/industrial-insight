@@ -1,14 +1,525 @@
-async function loadData() {
-  try {
-    const response = await fetch('./data.json');
-    if (!response.ok) throw new Error('Kunde inte ladda data.json');
-    const issues = await response.json();
-    
-    els.projTitle.textContent = 'industrial-insight';
-    // Använd fast datum för 'plan vs reality' så det blir konsekvent
-    render(issues, 'date', '2026-08-17');
-    els.dashboard.style.display = 'block';
-  } catch (err) {
-    console.error('Fel vid laddning av dashboard-data:', err);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project status</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.47.0/iconfont/tabler-icons.min.css">
+<style>
+  :root {
+    --bg: #0d0f0e;
+    --surface-1: #141716;
+    --surface-2: #191c1b;
+    --border: rgba(255,255,255,0.09);
+    --border-strong: rgba(255,255,255,0.16);
+    --text-primary: #ece9e2;
+    --text-secondary: #9b9a92;
+    --text-muted: #6b6a63;
+    --teal: #5dcaa5;
+    --teal-dim: #1d9e75;
+    --teal-bg: rgba(29,158,117,0.12);
+    --coral: #f0997b;
+    --coral-dim: #d85a30;
+    --coral-bg: rgba(216,90,48,0.12);
+    --amber: #ef9f27;
+    --amber-bg: rgba(239,159,39,0.12);
+    --red: #e24b4a;
+    --red-bg: rgba(226,75,74,0.12);
+    --font-mono: 'SF Mono', 'Roboto Mono', Consolas, monospace;
+    --font-sans: -apple-system, 'Segoe UI', sans-serif;
   }
-}
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    padding: 32px 24px 64px;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; }
+
+  /* header */
+  .head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+  .head h1 { font-size: 20px; font-weight: 500; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .head .sub { font-size: 13px; color: var(--text-muted); font-family: var(--font-mono); }
+  .refresh-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); display: inline-block; }
+  .status-dot.err { background: var(--red); }
+  button.icon-btn {
+    background: transparent; border: 0.5px solid var(--border-strong); color: var(--text-secondary);
+    border-radius: 6px; padding: 6px 12px; font-size: 12px; font-family: var(--font-mono); cursor: pointer;
+  }
+  button.icon-btn:hover { background: var(--surface-1); color: var(--text-primary); }
+  .lang-toggle { display: flex; border: 0.5px solid var(--border-strong); border-radius: 6px; overflow: hidden; }
+  .lang-toggle button {
+    background: transparent; border: none; color: var(--text-secondary); padding: 6px 10px;
+    font-size: 11px; font-family: var(--font-mono); cursor: pointer;
+  }
+  .lang-toggle button.active { background: var(--teal-dim); color: #06231a; }
+  .lang-toggle button:not(.active):hover { background: var(--surface-1); color: var(--text-primary); }
+
+  /* loading / error */
+  .center-msg { text-align: center; padding: 60px 20px; color: var(--text-muted); font-size: 13px; font-family: var(--font-mono); }
+  .spinner { width: 20px; height: 20px; border: 2px solid var(--border-strong); border-top-color: var(--teal); border-radius: 50%; margin: 0 auto 14px; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  #dashboard { display: none; }
+
+  /* KPI row */
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+  .kpi { background: var(--surface-1); border: 0.5px solid var(--border); border-radius: 10px; padding: 16px; }
+  .kpi .label { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 8px; text-transform: lowercase; }
+  .kpi .value { font-size: 28px; font-weight: 500; font-family: var(--font-mono); line-height: 1; }
+  .kpi .value small { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+  .kpi .delta { font-size: 11px; margin-top: 6px; font-family: var(--font-mono); display: flex; align-items: center; gap: 5px; }
+  .kpi .delta.up { color: var(--teal); }
+  .kpi .delta.warn { color: var(--coral); }
+  .kpi .delta i { font-size: 12px; flex-shrink: 0; }
+
+  /* section */
+  .section { margin-bottom: 32px; }
+  .section-title { font-size: 13px; font-weight: 500; color: var(--text-secondary); margin: 0 0 14px; display: flex; align-items: center; justify-content: space-between; }
+  .section-title .count { font-family: var(--font-mono); color: var(--text-muted); font-weight: 400; font-size: 12px; }
+
+  /* scope vs reality bar */
+  .scope-card { background: var(--surface-1); border: 0.5px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scope-legend { display: flex; gap: 18px; margin-bottom: 16px; font-size: 12px; font-family: var(--font-mono); color: var(--text-secondary); flex-wrap: wrap; }
+  .scope-legend span { display: flex; align-items: center; gap: 6px; }
+  .swatch { width: 9px; height: 9px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+  .scope-track {
+    position: relative; height: 40px; background: var(--surface-2); border-radius: 6px;
+    border: 1px dashed var(--border-strong); margin-top: 24px;
+  }
+  .scope-orig-marker {
+    position: absolute; top: -1px; bottom: -1px; width: 2px; background: var(--text-secondary); z-index: 2;
+  }
+  .scope-orig-marker::after {
+    content: attr(data-label); position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+    font-size: 10px; font-family: var(--font-mono); color: var(--text-secondary); white-space: nowrap;
+  }
+  .scope-fill { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; overflow: hidden; border-radius: 5px; }
+  .scope-seg { height: 100%; flex-shrink: 0; }
+  .scope-seg.done { background: var(--teal-dim); }
+  .scope-seg.open-planned { background: var(--surface-2); }
+  .scope-seg.new-open { background-image: repeating-linear-gradient(45deg, var(--coral-dim), var(--coral-dim) 3px, transparent 3px, transparent 7px); background-color: var(--coral-bg); }
+  .scope-numbers { display: flex; justify-content: space-between; margin-top: 10px; font-size: 11px; font-family: var(--font-mono); color: var(--text-muted); }
+
+  /* category table */
+  .cat-list { background: var(--surface-1); border: 0.5px solid var(--border); border-radius: 10px; padding: 6px; }
+  .cat-row { display: grid; grid-template-columns: 22px 130px 1fr 50px 75px; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 0.5px solid var(--border); }
+  .cat-row:last-child { border-bottom: none; }
+  .cat-icon { width: 18px; height: 18px; border-radius: 5px; display: flex; align-items: center; justify-content: center; background: var(--surface-2); color: var(--text-muted); flex-shrink: 0; }
+  .cat-name { font-size: 13px; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cat-bar-track { height: 8px; background: var(--surface-2); border-radius: 4px; overflow: hidden; display: flex; }
+  .cat-bar-fill { height: 100%; background: var(--teal-dim); }
+  .cat-bar-rest { height: 100%; background: var(--border-strong); }
+  
+  .cat-pct { font-size: 13px; font-family: var(--font-mono); font-weight: 500; color: var(--text-primary); text-align: right; white-space: nowrap; }
+  .cat-fraction { font-size: 11px; font-family: var(--font-mono); color: var(--text-muted); text-align: left; white-space: nowrap; }
+
+  /* scope creep sparkline */
+  .creep-card { background: var(--surface-1); border: 0.5px solid var(--border); border-radius: 10px; padding: 20px; }
+  .creep-svg-wrap { width: 100%; }
+  .creep-caption { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); margin-top: 10px; }
+
+  /* activity feed */
+  .feed { background: var(--surface-1); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .feed-item { display: grid; grid-template-columns: 20px 1fr auto; gap: 10px; align-items: start; padding: 11px 14px; border-bottom: 0.5px solid var(--border); font-size: 13px; }
+  .feed-item:last-child { border-bottom: none; }
+  .feed-icon { width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; margin-top: 1px; }
+  .feed-icon.closed { background: var(--teal-bg); color: var(--teal); }
+  .feed-icon.stale { background: var(--amber-bg); color: var(--amber); }
+  .feed-title a { color: inherit; text-decoration: none; }
+  .feed-title a:hover { color: var(--teal); }
+  .feed-meta, .feed-time { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); margin-top: 2px; }
+  .tabs { display: flex; gap: 4px; margin-bottom: 14px; flex-wrap: wrap; }
+  .tab { background: transparent; border: 0.5px solid var(--border-strong); color: var(--text-secondary); border-radius: 6px; padding: 6px 12px; font-size: 12px; font-family: var(--font-mono); cursor: pointer; }
+  .tab.active { background: var(--surface-1); color: var(--teal); border-color: var(--teal-dim); }
+  .empty-feed { padding: 30px; text-align: center; color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
+
+  @media (max-width: 640px) {
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .cat-row { grid-template-columns: 20px 1fr; grid-template-areas: "icon name" "icon bar" "icon stat"; row-gap: 6px; padding: 12px 14px; }
+    .cat-icon { grid-area: icon; align-self: start; }
+    .cat-name { grid-area: name; white-space: normal; }
+    .cat-bar-track { grid-area: bar; }
+    .cat-pct { grid-area: stat; text-align: left; }
+    .cat-fraction { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <div>
+      <h1 id="proj-title">industrial-insight</h1>
+      <div class="sub" id="proj-sub">laddar data...</div>
+    </div>
+    <div class="refresh-row">
+      <div class="lang-toggle">
+        <button id="lang-en" class="active">EN</button>
+        <button id="lang-sv">SV</button>
+      </div>
+      <span id="status-dot-wrap" style="display:flex; align-items:center; gap:10px;">
+        <span class="status-dot" id="status-dot"></span>
+        <span class="hint" id="last-updated">&mdash;</span>
+        <button class="icon-btn" id="refresh-btn">refresh</button>
+      </span>
+    </div>
+  </div>
+
+  <div class="center-msg" id="loading-msg">
+    <div class="spinner"></div>
+    <div id="loading-text">läser in data.json...</div>
+  </div>
+
+  <div id="dashboard">
+    <div class="kpi-row" id="kpi-row"></div>
+
+    <div class="section">
+      <div class="section-title">
+        <span id="lbl-plan">plan vs reality</span>
+        <span class="count" id="scope-count"></span>
+      </div>
+      <div class="scope-card">
+        <div class="scope-legend">
+          <span><span class="swatch" style="background:var(--teal-dim)"></span><span id="lbl-done">done</span></span>
+          <span><span class="swatch" style="background:var(--surface-2);border:1px solid var(--border-strong)"></span><span id="lbl-planned">open, planned</span></span>
+          <span><span class="swatch" style="background:var(--coral-dim)"></span><span id="lbl-new">new, open</span></span>
+        </div>
+        <div class="scope-track" id="scope-track"></div>
+        <div class="scope-numbers" id="scope-numbers"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <span id="lbl-cat">status per huvudkategori</span>
+      </div>
+      <div class="cat-list" id="cat-list"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <span id="lbl-creep">scope creep over time</span>
+      </div>
+      <div class="creep-card">
+        <div class="creep-svg-wrap" id="creep-svg"></div>
+        <div class="creep-caption" id="creep-caption"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <span id="lbl-activity">what's happening now</span>
+      </div>
+      <div class="tabs">
+        <button class="tab active" data-feed="recent" id="tab-recent">recently closed</button>
+        <button class="tab" data-feed="stale" id="tab-stale">open for a while</button>
+        <button class="tab" data-feed="discussed" id="tab-discussed">most discussed</button>
+        <button class="tab" data-feed="new" id="tab-new">newly added</button>
+      </div>
+      <div class="feed" id="feed"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  let lang = 'en';
+  let state = { issues: [] };
+  let activeFeedTab = 'recent';
+
+  const els = {
+    loadingMsg: document.getElementById('loading-msg'),
+    loadingText: document.getElementById('loading-text'),
+    dashboard: document.getElementById('dashboard'),
+    refreshBtn: document.getElementById('refresh-btn'),
+    statusDot: document.getElementById('status-dot'),
+    lastUpdated: document.getElementById('last-updated'),
+    projTitle: document.getElementById('proj-title'),
+    projSub: document.getElementById('proj-sub'),
+    kpiRow: document.getElementById('kpi-row'),
+    scopeTrack: document.getElementById('scope-track'),
+    scopeNumbers: document.getElementById('scope-numbers'),
+    scopeCount: document.getElementById('scope-count'),
+    catList: document.getElementById('cat-list'),
+    creepSvg: document.getElementById('creep-svg'),
+    creepCaption: document.getElementById('creep-caption'),
+    feed: document.getElementById('feed'),
+  };
+
+  document.getElementById('lang-en').addEventListener('click', () => { lang = 'en'; updateLang(); renderDashboard(); });
+  document.getElementById('lang-sv').addEventListener('click', () => { lang = 'sv'; updateLang(); renderDashboard(); });
+
+  function updateLang() {
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    document.getElementById('lang-sv').classList.toggle('active', lang === 'sv');
+    document.getElementById('lbl-plan').textContent = lang === 'sv' ? 'plan vs verklighet' : 'plan vs reality';
+    document.getElementById('lbl-done').textContent = lang === 'sv' ? 'klara' : 'done';
+    document.getElementById('lbl-planned').textContent = lang === 'sv' ? 'öppna, planerade' : 'open, planned';
+    document.getElementById('lbl-new').textContent = lang === 'sv' ? 'nya, öppna' : 'new, open';
+    document.getElementById('lbl-cat').textContent = lang === 'sv' ? 'status per huvudkategori' : 'status by main category';
+    document.getElementById('lbl-creep').textContent = lang === 'sv' ? 'scope-glidning över tid' : 'scope creep over time';
+    document.getElementById('lbl-activity').textContent = lang === 'sv' ? 'vad händer just nu' : "what's happening now";
+    document.getElementById('refresh-btn').textContent = lang === 'sv' ? 'uppdatera' : 'refresh';
+    
+    // Översätt flikarna under "vad händer just nu"
+    document.getElementById('tab-recent').textContent = lang === 'sv' ? 'nyligen stängda' : 'recently closed';
+    document.getElementById('tab-stale').textContent = lang === 'sv' ? 'öppna sedan en tid' : 'open for a while';
+    document.getElementById('tab-discussed').textContent = lang === 'sv' ? 'mest diskuterade' : 'most discussed';
+    document.getElementById('tab-new').textContent = lang === 'sv' ? 'nyligen tillagda' : 'newly added';
+
+    if(state.issues.length) {
+      els.projSub.textContent = state.issues.length + (lang === 'sv' ? ' issues totalt' : ' issues total');
+      renderDashboard();
+    }
+  }
+
+  els.refreshBtn.addEventListener('click', loadData);
+
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+      tab.classList.add('active');
+      activeFeedTab = tab.dataset.feed;
+      renderFeed();
+    });
+  });
+
+  async function loadData() {
+    els.loadingMsg.style.display = 'block';
+    els.dashboard.style.display = 'none';
+    try {
+      const res = await fetch('./data.json');
+      if (!res.ok) throw new Error('Kunde inte läsa data.json');
+      const raw = await res.json();
+      state.issues = raw.filter(i => !i.pull_request);
+      
+      els.projSub.textContent = state.issues.length + (lang === 'sv' ? ' issues totalt' : ' issues total');
+      els.lastUpdated.textContent = new Date().toLocaleTimeString();
+      els.statusDot.className = 'status-dot';
+      
+      renderDashboard();
+      els.loadingMsg.style.display = 'none';
+      els.dashboard.style.display = 'block';
+    } catch (err) {
+      els.statusDot.className = 'status-dot err';
+      els.loadingText.textContent = 'Fel vid laddning: ' + err.message;
+    }
+  }
+
+  function getCategory(issue) {
+    const title = (issue.title || '').toLowerCase();
+    const labels = (issue.labels || []).map(l => (typeof l === 'string' ? l : l.name).toLowerCase());
+    const combined = title + ' ' + labels.join(' ');
+
+    if (/database|db|sql|postgres|mongo|migration/i.test(combined)) {
+      return 'Databas';
+    }
+    if (/frontend|ui|ux|design|client|css|html|component/i.test(combined)) {
+      return 'Frontend';
+    }
+    if (/backend|api|server|auth|login|service|logic|machine/i.test(combined)) {
+      return 'Backend';
+    }
+    if (/devops|infra|ci|cd|docker|deploy|pipeline|setup|dependency/i.test(combined)) {
+      return 'Devops / Setup';
+    }
+    return lang === 'sv' ? 'Övrigt' : 'Other';
+  }
+
+  function renderDashboard() {
+    const issues = state.issues;
+    if (!issues.length) return;
+
+    const sorted = [...issues].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+    const cutoff = new Date(sorted[0].created_at).getTime() + 48 * 3600 * 1000;
+
+    const planned = issues.filter(i => new Date(i.created_at).getTime() <= cutoff);
+    const newIssues = issues.filter(i => new Date(i.created_at).getTime() > cutoff);
+    const closed = issues.filter(i => i.state === 'closed');
+    const open = issues.filter(i => i.state === 'open');
+    const plannedOpen = planned.filter(i => i.state === 'open');
+    const newOpen = newIssues.filter(i => i.state === 'open');
+    const plannedClosed = planned.filter(i => i.state === 'closed');
+    const newClosed = newIssues.filter(i => i.state === 'closed');
+
+    const pct = Math.round((closed.length / issues.length) * 100) || 0;
+
+    const txtCompleted = lang === 'sv' ? 'genomfört' : 'completed';
+    const txtOpenIssues = lang === 'sv' ? 'öppna issues' : 'open issues';
+    const txtOrigScope = lang === 'sv' ? 'ursprunglig scope' : 'original scope';
+    const txtScopeDrift = lang === 'sv' ? 'scope-glidning' : 'scope drift';
+    
+    const txtPlan = lang === 'sv' ? 'plan' : 'plan';
+    const txtNew = lang === 'sv' ? 'nya' : 'new';
+    const txtDone = lang === 'sv' ? 'klara' : 'done';
+
+    els.kpiRow.innerHTML = [
+      kpi(txtCompleted, pct + '<small>%</small>', closed.length + ' / ' + issues.length, 'up', 'ti-check'),
+      kpi(txtOpenIssues, open.length, plannedOpen.length + ` ${txtPlan}, ` + newOpen.length + ` ${txtNew}`, null, 'ti-circle-dot'),
+      kpi(txtOrigScope, planned.length, plannedClosed.length + ` ${txtDone}`, null, 'ti-target-arrow'),
+      kpi(txtScopeDrift, '+' + newIssues.length, newClosed.length + ` ${txtDone}`, newIssues.length > 0 ? 'warn' : null, 'ti-alert-triangle')
+    ].join('');
+
+    const total = issues.length || 1;
+    const doneW = (closed.length / total) * 100;
+    const plannedOpenW = (plannedOpen.length / total) * 100;
+    const newOpenW = (newOpen.length / total) * 100;
+    const origMarkerPos = Math.min(100, (planned.length / total) * 100);
+
+    els.scopeTrack.innerHTML =
+      '<div class="scope-fill">' +
+        '<div class="scope-seg done" style="width:' + doneW.toFixed(2) + '%"></div>' +
+        '<div class="scope-seg open-planned" style="width:' + plannedOpenW.toFixed(2) + '%"></div>' +
+        '<div class="scope-seg new-open" style="width:' + newOpenW.toFixed(2) + '%"></div>' +
+      '</div>' +
+      '<div class="scope-orig-marker" style="left:' + origMarkerPos.toFixed(2) + '%" data-label="' + planned.length + '"></div>';
+
+    els.scopeNumbers.innerHTML = '<span>0</span><span>' + total + ' total (' + newIssues.length + (lang === 'sv' ? ' tillagda' : ' added') + ')</span>';
+    els.scopeCount.textContent = planned.length + (lang === 'sv' ? ' planerade · ' : ' planned · ') + newIssues.length + (lang === 'sv' ? ' nya' : ' new');
+
+    renderCategories(issues);
+    renderCreepChart(issues, cutoff);
+    state.computed = { closed, open, newIssues };
+    renderFeed();
+  }
+
+  function renderCategories(issues) {
+    const catMap = {};
+    issues.forEach(i => {
+      const catName = getCategory(i);
+      if (!catMap[catName]) catMap[catName] = { total: 0, closed: 0, icon: getIconForCategory(catName) };
+      catMap[catName].total++;
+      if (i.state === 'closed') catMap[catName].closed++;
+    });
+
+    let entries = Object.entries(catMap).sort((a, b) => {
+      const otherNameSv = 'Övrigt';
+      const otherNameEn = 'Other';
+      if (a[0] === otherNameSv || a[0] === otherNameEn) return 1;
+      if (b[0] === otherNameSv || b[0] === otherNameEn) return -1;
+      return b[1].total - a[1].total;
+    });
+
+    els.catList.innerHTML = entries.map(([name, d]) => {
+      const pctFrac = d.total ? d.closed / d.total : 0;
+      const pct = pctFrac * 100;
+      const pctStr = Math.round(pct) + '%';
+      return '<div class="cat-row">' +
+        '<div class="cat-icon"><i class="ti ' + d.icon + '"></i></div>' +
+        '<div class="cat-name">' + escapeHtml(name) + '</div>' +
+        '<div class="cat-bar-track"><div class="cat-bar-fill" style="width:' + pct.toFixed(2) + '%"></div><div class="cat-bar-rest" style="width:' + (100-pct).toFixed(2) + '%"></div></div>' +
+        '<div class="cat-pct">' + pctStr + '</div>' +
+        '<div class="cat-fraction">(' + d.closed + ' / ' + d.total + ')</div>' +
+      '</div>';
+    }).join('') || '<div class="empty-feed">Inga kategorier</div>';
+  }
+
+  function getIconForCategory(name) {
+    if (name === 'Backend') return 'ti-server';
+    if (name === 'Frontend') return 'ti-browser';
+    if (name === 'Databas') return 'ti-database';
+    if (name === 'Devops / Setup') return 'ti-cloud';
+    return 'ti-tag';
+  }
+
+  function renderCreepChart(issues, cutoff) {
+    const sorted = [...issues].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+    const start = new Date(sorted[0].created_at).getTime();
+    const end = Date.now();
+    const span = Math.max(end - start, 1);
+    const BUCKETS = 24;
+    const bucketMs = span / BUCKETS;
+    const buckets = new Array(BUCKETS).fill(0);
+
+    sorted.forEach(i => {
+      const created = new Date(i.created_at).getTime();
+      if (created > cutoff) {
+        let idx = Math.floor((created - start) / bucketMs);
+        if (idx >= BUCKETS) idx = BUCKETS - 1;
+        if (idx < 0) idx = 0;
+        buckets[idx]++;
+      }
+    });
+
+    const maxVal = Math.max(...buckets, 1);
+    const w = 640, h = 80, padBottom = 4;
+    const usableH = h - 14;
+    const barW = w / BUCKETS;
+    const cutoffIdx = Math.floor((cutoff - start) / bucketMs);
+
+    let bars = '';
+    for (let idx = 0; idx < BUCKETS; idx++) {
+      const val = buckets[idx];
+      const barH = val ? Math.max((val / maxVal) * usableH, 3) : 1;
+      const x = idx * barW;
+      const y = h - padBottom - barH;
+      const isPlanned = idx < cutoffIdx;
+      const fill = val === 0 ? 'var(--border)' : (isPlanned ? 'var(--text-muted)' : 'var(--coral-dim)');
+      bars += '<rect x="' + (x + barW * 0.15) + '" y="' + y + '" width="' + (barW * 0.7) + '" height="' + barH + '" fill="' + fill + '" rx="1"></rect>';
+    }
+    els.creepSvg.innerHTML = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" height="' + h + '">' + bars + '</svg>';
+    const addedCount = issues.filter(i => new Date(i.created_at).getTime() > cutoff).length;
+    els.creepCaption.textContent = addedCount + (lang === 'sv' ? ' issues tillkomna efter start.' : ' issues added after start.');
+  }
+
+  function renderFeed() {
+    if (!state.computed) return;
+    const { closed, open, newIssues } = state.computed;
+    let items = [];
+
+    const txtClosed = lang === 'sv' ? 'Stängd' : 'Closed';
+    const txtStale = lang === 'sv' ? 'Öppen länge' : 'Open for a while';
+    const txtComments = lang === 'sv' ? 'kommentarer' : 'comments';
+    const txtNewIssue = lang === 'sv' ? 'Nytt ärende' : 'New issue';
+
+    if (activeFeedTab === 'recent') {
+      items = [...closed].sort((a,b) => new Date(b.closed_at) - new Date(a.closed_at)).slice(0, 8)
+        .map(i => ({ i, icon: 'closed', symbol: '✓', meta: txtClosed }));
+    } else if (activeFeedTab === 'stale') {
+      items = [...open].sort((a,b) => new Date(a.created_at) - new Date(b.created_at)).slice(0, 8)
+        .map(i => ({ i, icon: 'stale', symbol: '!', meta: txtStale }));
+    } else if (activeFeedTab === 'discussed') {
+      items = [...open, ...closed].sort((a,b) => b.comments - a.comments).slice(0, 8)
+        .map(i => ({ i, icon: 'closed', symbol: i.comments, meta: i.comments + ` ${txtComments}` }));
+    } else if (activeFeedTab === 'new') {
+      items = [...newIssues].sort((a,b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 8)
+        .map(i => ({ i, icon: 'closed', symbol: '+', meta: txtNewIssue }));
+    }
+
+    els.feed.innerHTML = items.map(({i, icon, symbol, meta}) =>
+      '<div class="feed-item">' +
+        '<div class="feed-icon ' + icon + '">' + symbol + '</div>' +
+        '<div>' +
+          '<div class="feed-title"><a href="' + (i.html_url || '#') + '" target="_blank">#' + i.number + ' ' + escapeHtml(i.title) + '</a></div>' +
+          '<div class="feed-meta">' + meta + '</div>' +
+        '</div>' +
+        '<div class="feed-time">' + new Date(i.updated_at).toLocaleDateString() + '</div>' +
+      '</div>'
+    ).join('') || '<div class="empty-feed">' + (lang === 'sv' ? 'Inget att visa' : 'Nothing to show') + '</div>';
+  }
+
+  function kpi(label, value, delta, deltaClass, iconClass) {
+    return '<div class="kpi">' +
+      '<div class="label">' + label + '</div>' +
+      '<div class="value">' + value + '</div>' +
+      (delta ? '<div class="delta' + (deltaClass ? ' ' + deltaClass : '') + '"><i class="ti ' + iconClass + '"></i><span>' + delta + '</span></div>' : '') +
+    '</div>';
+  }
+
+  function escapeHtml(s) {
+    const d = document.createElement('div');
+    d.textContent = s || '';
+    return d.innerHTML;
+  }
+
+  loadData();
+})();
+</script>
+</body>
+</html>
