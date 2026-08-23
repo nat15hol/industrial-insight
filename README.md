@@ -105,7 +105,7 @@ Development runs August 17 – September 3, 2026 (18 days), with the presentatio
 | 18 | [Final Stabilization & Presentation Prep](https://github.com/nat15hol/industrial-insight/milestone/18) | Freeze, docs, demo rehearsal |
 | 19 | — | Presentation Day |
 
-> Per the project's Day 18 Freeze Rule, if the system is unstable at the end of Day 18, the last stable state verified at Checkpoint 2 (Day 14) becomes the
+> Per the project's Day 18 Freeze Rule, if the system is unstable at the end of Day 18, the last stable state verified at Checkpoint 2 (Day 14) becomes the presentation baseline — see [known-limitations.md](known-limitations.md).
 
 ---
 
