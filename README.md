@@ -71,9 +71,15 @@ The AI-assisted incident assessment is an optional decision-support layer and is
 ## Project Status
 
 **Live status:** for up-to-date issue counts, milestone progress, and
-scope tracking, see the [Project Dashboard](dashboard/dashboard.html).
-The dashboard reads directly from GitHub Issues via an automated
-GitHub Actions workflow and requires no token or manual updates to view.
+scope tracking, run the project dashboard locally:
+
+    cd dashboard
+    python -m http.server 8000
+
+Then open `http://localhost:8000/dashboard.html` in a browser.
+The underlying data (`dashboard/data.json`) is refreshed automatically
+via GitHub Actions whenever issues or milestones change — no GitHub
+token or manual updates required.
 
 Development runs August 17 – September 3, 2026 (18 days), with the presentation on September 4. Progress is tracked via one [GitHub Milestone](https://github.com/nat15hol/industrial-insight/milestones) per day, each scoped to a specific set of issues. The table below reflects the original plan at the start of development; see the dashboard above for current, live status.
 
@@ -99,7 +105,7 @@ Development runs August 17 – September 3, 2026 (18 days), with the presentatio
 | 18 | [Final Stabilization & Presentation Prep](https://github.com/nat15hol/industrial-insight/milestone/18) | Freeze, docs, demo rehearsal |
 | 19 | — | Presentation Day |
 
-> Per the project's Day 18 Freeze Rule, if the system is unstable at the end of Day 18, the last stable state verified at Checkpoint 2 (Day 14) becomes the presentation baseline — see [known-limitations.md](known-limitations.md).
+> Per the project's Day 18 Freeze Rule, if the system is unstable at the end of Day 18, the last stable state verified at Checkpoint 2 (Day 14) becomes the
 
 ---
 
