@@ -70,31 +70,34 @@ The AI-assisted incident assessment is an optional decision-support layer and is
 
 ## Project Status
 
-Development runs August 17 – September 3, 2026 (18 days), with the presentation on September 4. Progress is tracked via one [GitHub Milestone](https://github.com/nat15hol/industrial-insight/milestones) per day, each scoped to a specific set of issues. This table reflects the plan at the start of development and will be updated as milestones close.
+**Live status:** for up-to-date issue counts, milestone progress, and
+scope tracking, see the [Project Dashboard](dashboard/dashboard.html).
+The dashboard reads directly from GitHub Issues via an automated
+GitHub Actions workflow and requires no token or manual updates to view.
 
-| Day | Milestone | Focus | Issues | Status |
-| :-: | --- | --- | :-: | --- |
-| 1 | [Project Foundation](https://github.com/nat15hol/industrial-insight/milestone/1) | DB setup, EF Core, seed mechanism | 0/4 | ⏳ Not started |
-| 2 | [Authentication](https://github.com/nat15hol/industrial-insight/milestone/2) | Registration, login, JWT | 0/5 | ⏳ Not started |
-| 3 | [RBAC + Machines Backend](https://github.com/nat15hol/industrial-insight/milestone/3) | Role enforcement, Machine CRUD | 0/4 | ⏳ Not started |
-| 4 | [Frontend Foundation](https://github.com/nat15hol/industrial-insight/milestone/4) | Vite/React setup, routing, auth UI | 0/4 | ⏳ Not started |
-| 5 | [Machines Frontend](https://github.com/nat15hol/industrial-insight/milestone/5) | Machine list/detail views | 0/3 | ⏳ Not started |
-| 6 | [Frontend & Integration Polish](https://github.com/nat15hol/industrial-insight/milestone/6) | Cleanup & edge cases | 0/1 | ⏳ Not started |
-| 7 | [Integration Checkpoint 1](https://github.com/nat15hol/industrial-insight/milestone/7) | Foundation validation | 0/2 | ⏳ Not started |
-| 8 | [Incidents Backend](https://github.com/nat15hol/industrial-insight/milestone/8) | Incident model, create/retrieve, validation | 0/4 | ⏳ Not started |
-| 9 | [Incidents Frontend](https://github.com/nat15hol/industrial-insight/milestone/9) | Incident reporting form, list/detail views | 0/3 | ⏳ Not started |
-| 10 | [Maintenance Tasks](https://github.com/nat15hol/industrial-insight/milestone/10) | Task model, assignment, status tracking | 0/5 | ⏳ Not started |
-| 11 | [Optional AI-Assisted Assessment](https://github.com/nat15hol/industrial-insight/milestone/11) | AI service abstraction, schema validation, fallback | 0/5 | ⏳ Not started (P1, optional) |
-| 12 | [Data Pipeline: Ingestion](https://github.com/nat15hol/industrial-insight/milestone/12) | CSV ingestion, schema/duplicate validation | 0/5 | ⏳ Not started |
-| 13 | [Pipeline Transformation + Dashboard](https://github.com/nat15hol/industrial-insight/milestone/13) | Transformation, SQL Server load, minimal dashboard | 0/4 | ⏳ Not started |
-| 14 | [Vertical Slice Checkpoint 2](https://github.com/nat15hol/industrial-insight/milestone/14) | MVP validation (operational, data, AI) | 0/3 | ⏳ Not started |
-| 15 | [Integration & Stabilization](https://github.com/nat15hol/industrial-insight/milestone/15) | Integration testing, regression fixes | 0/4 | ⏳ Not started |
-| 16 | [Analytics + Dashboard](https://github.com/nat15hol/industrial-insight/milestone/16) | Full KPI set, Priority Score, dashboard UI | 0/7 | ⏳ Not started |
-| 17 | [Backend Tests + Stretch](https://github.com/nat15hol/industrial-insight/milestone/17) | xUnit test suite, optional anomaly detection | 0/5 | ⏳ Not started |
-| 18 | [Final Stabilization & Presentation Prep](https://github.com/nat15hol/industrial-insight/milestone/18) | Freeze, docs, demo rehearsal | 0/4 | ⏳ Not started |
-| 19 | — | Presentation Day | — | — |
+Development runs August 17 – September 3, 2026 (18 days), with the presentation on September 4. Progress is tracked via one [GitHub Milestone](https://github.com/nat15hol/industrial-insight/milestones) per day, each scoped to a specific set of issues. The table below reflects the original plan at the start of development; see the dashboard above for current, live status.
 
-**Overall: 0 / 74 issues closed (0%)**
+| Day | Milestone | Focus |
+| :-: | --- | --- |
+| 1 | [Project Foundation](https://github.com/nat15hol/industrial-insight/milestone/1) | DB setup, EF Core, seed mechanism |
+| 2 | [Authentication](https://github.com/nat15hol/industrial-insight/milestone/2) | Registration, login, JWT |
+| 3 | [RBAC + Machines Backend](https://github.com/nat15hol/industrial-insight/milestone/3) | Role enforcement, Machine CRUD |
+| 4 | [Frontend Foundation](https://github.com/nat15hol/industrial-insight/milestone/4) | Vite/React setup, routing, auth UI |
+| 5 | [Machines Frontend](https://github.com/nat15hol/industrial-insight/milestone/5) | Machine list/detail views |
+| 6 | [Frontend & Integration Polish](https://github.com/nat15hol/industrial-insight/milestone/6) | Cleanup & edge cases |
+| 7 | [Integration Checkpoint 1](https://github.com/nat15hol/industrial-insight/milestone/7) | Foundation validation |
+| 8 | [Incidents Backend](https://github.com/nat15hol/industrial-insight/milestone/8) | Incident model, create/retrieve, validation |
+| 9 | [Incidents Frontend](https://github.com/nat15hol/industrial-insight/milestone/9) | Incident reporting form, list/detail views |
+| 10 | [Maintenance Tasks](https://github.com/nat15hol/industrial-insight/milestone/10) | Task model, assignment, status tracking |
+| 11 | [Optional AI-Assisted Assessment](https://github.com/nat15hol/industrial-insight/milestone/11) | AI service abstraction, schema validation, fallback (P1, optional) |
+| 12 | [Data Pipeline: Ingestion](https://github.com/nat15hol/industrial-insight/milestone/12) | CSV ingestion, schema/duplicate validation |
+| 13 | [Pipeline Transformation + Dashboard](https://github.com/nat15hol/industrial-insight/milestone/13) | Transformation, SQL Server load, minimal dashboard |
+| 14 | [Vertical Slice Checkpoint 2](https://github.com/nat15hol/industrial-insight/milestone/14) | MVP validation (operational, data, AI) |
+| 15 | [Integration & Stabilization](https://github.com/nat15hol/industrial-insight/milestone/15) | Integration testing, regression fixes |
+| 16 | [Analytics + Dashboard](https://github.com/nat15hol/industrial-insight/milestone/16) | Full KPI set, Priority Score, dashboard UI |
+| 17 | [Backend Tests + Stretch](https://github.com/nat15hol/industrial-insight/milestone/17) | xUnit test suite, optional anomaly detection |
+| 18 | [Final Stabilization & Presentation Prep](https://github.com/nat15hol/industrial-insight/milestone/18) | Freeze, docs, demo rehearsal |
+| 19 | — | Presentation Day |
 
 > Per the project's Day 18 Freeze Rule, if the system is unstable at the end of Day 18, the last stable state verified at Checkpoint 2 (Day 14) becomes the presentation baseline — see [known-limitations.md](known-limitations.md).
 
