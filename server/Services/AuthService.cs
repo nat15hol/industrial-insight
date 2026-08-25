@@ -86,11 +86,15 @@ public class AuthService
 
         var claims = new[]
         {
-        new Claim(JwtRegisteredClaimNames.Sub, user.UserId.ToString()),
-        new Claim(JwtRegisteredClaimNames.Email, user.Email),
-        new Claim(ClaimTypes.Name, user.Name),
-        new Claim(ClaimTypes.Role, user.Role?.Name ?? throw new InvalidOperationException("User role is missing."))
-    };
+            new Claim(JwtRegisteredClaimNames.Sub, user.UserId.ToString()),
+            new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email),
+            new Claim(ClaimTypes.Name, user.Name),
+            new Claim(
+            ClaimTypes.Role,
+            user.Role?.Name
+            ?? throw new InvalidOperationException("User role is missing."))
+        };
 
         var token = new JwtSecurityToken(
             issuer: _configuration["Jwt:Issuer"],

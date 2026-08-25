@@ -2,11 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace server.DTOs;
 
-public class CreateIncidentRequest
+public class UpdateIncidentRequest
 {
-    [Required]
-    public string Description { get; set; } = string.Empty;
-
     [Required]
     [RegularExpression("^(Open|Closed)$")]
     public string Status { get; set; } = string.Empty;
@@ -20,7 +17,4 @@ public class CreateIncidentRequest
     public string? AiSuggestion { get; set; }
 
     public DateTime? ResolvedAt { get; set; }
-
-    [Range(1, int.MaxValue)]
-    public int MachineId { get; set; }
 }

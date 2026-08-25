@@ -102,8 +102,12 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("ManagerOnly", policy =>
         policy.RequireRole("Manager"));
+
     options.AddPolicy("TechnicianOnly", policy =>
         policy.RequireRole("Technician"));
+
+    options.AddPolicy("IncidentAccess", policy =>
+        policy.RequireRole("Manager", "Technician"));
 });
 
 // Entity Framework Core
@@ -120,8 +124,6 @@ if (app.Environment.IsDevelopment())
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     DbSeeder.Seed(context);
 }
-
-app.UseCors("Client");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

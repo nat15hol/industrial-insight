@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.DTOs;
 using server.Models;
+using System.Security.Claims;
 
 namespace server.Controllers;
 
@@ -19,6 +21,7 @@ public class IncidentController : ControllerBase
 
     // GET: /api/Incident
     [HttpGet]
+    [Authorize(Policy = "IncidentAccess")]
     public async Task<ActionResult<IEnumerable<IncidentResponse>>> GetIncidents()
     {
         var incidents = await _context.Incidents
@@ -42,6 +45,7 @@ public class IncidentController : ControllerBase
 
     // GET: /api/Incident/{id}
     [HttpGet("{id}")]
+    [Authorize(Policy = "IncidentAccess")]
     public async Task<ActionResult<IncidentResponse>> GetIncident(int id)
     {
         var incident = await _context.Incidents
@@ -71,9 +75,37 @@ public class IncidentController : ControllerBase
 
     // POST: /api/Incident
     [HttpPost]
+    [Authorize(Policy = "TechnicianOnly")]
     public async Task<ActionResult<IncidentResponse>> CreateIncident(
         CreateIncidentRequest request)
     {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out var userId))
+        {
+            return Unauthorized();
+        }
+        // Kontrollera att maskinen finns.
+        var machineExists = await _context.Machines
+            .AnyAsync(m => m.MachineId == request.MachineId);
+
+        if (!machineExists)
+        {
+            return NotFound(
+                $"Machine with id {request.MachineId} was not found.");
+        }
+
+        // Kontrollera att användaren finns.
+        var userExists = await _context.Users
+            .AnyAsync(u => u.UserId == userId);
+
+        if (!userExists)
+        {
+            return NotFound(
+                $"User with id {userId} was not found.");
+        }
+
+        // Skapa Incident-entiteten.
         var incident = new Incident
         {
             Description = request.Description,
@@ -84,12 +116,13 @@ public class IncidentController : ControllerBase
             CreatedAt = DateTime.UtcNow,
             ResolvedAt = request.ResolvedAt,
             MachineId = request.MachineId,
-            ReportedByUserId = request.ReportedByUserId
+            ReportedByUserId = userId
         };
 
         _context.Incidents.Add(incident);
         await _context.SaveChangesAsync();
 
+        // Skapa response-objektet.
         var response = new IncidentResponse
         {
             IncidentId = incident.IncidentId,
@@ -108,5 +141,45 @@ public class IncidentController : ControllerBase
             nameof(GetIncident),
             new { id = incident.IncidentId },
             response);
+    }
+
+        // PUT: /api/Incident/{id}
+    [HttpPut("{id}")]
+    [Authorize(Policy = "ManagerOnly")]
+    public async Task<ActionResult<IncidentResponse>> UpdateIncident(
+        int id,
+        UpdateIncidentRequest request)
+    {
+        var incident = await _context.Incidents
+            .FirstOrDefaultAsync(i => i.IncidentId == id);
+
+        if (incident == null)
+        {
+            return NotFound();
+        }
+
+        incident.Status = request.Status;
+        incident.Priority = request.Priority;
+        incident.Category = request.Category;
+        incident.AiSuggestion = request.AiSuggestion;
+        incident.ResolvedAt = request.ResolvedAt;
+
+        await _context.SaveChangesAsync();
+
+        var response = new IncidentResponse
+        {
+            IncidentId = incident.IncidentId,
+            Description = incident.Description,
+            Status = incident.Status,
+            Priority = incident.Priority,
+            Category = incident.Category,
+            AiSuggestion = incident.AiSuggestion,
+            CreatedAt = incident.CreatedAt,
+            ResolvedAt = incident.ResolvedAt,
+            MachineId = incident.MachineId,
+            ReportedByUserId = incident.ReportedByUserId
+        };
+
+        return Ok(response);
     }
 }
