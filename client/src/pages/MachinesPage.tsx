@@ -56,9 +56,9 @@ function MachinesPage() {
         <p>Browse and inspect industrial machines.</p>
       </header>
 
-      <section className="machine-layout">
+      <section className="machine-layout grid grid-cols-1 gap-6 md:grid-cols-2">
         <div className="machine-list">
-          <h2>Machine list</h2>
+          <h2 className="mb-3 text-xl font-semibold">Machine list</h2>
 
           {isLoading ? (
             <p>Loading machines...</p>
@@ -67,37 +67,59 @@ function MachinesPage() {
           ) : machines.length === 0 ? (
             <p>No machines found.</p>
           ) : (
-            machines.map((machine) => (
-              <button
-                key={machine.machineId}
-                type="button"
-                className="machine-card"
-                onClick={() => setSelectedMachine(machine)}
-              >
-                <strong>{machine.name}</strong>
-                <span>{machine.status}</span>
-              </button>
-            ))
+            <div className="flex flex-col gap-2">
+              {machines.map((machine) => (
+                <button
+                  key={machine.machineId}
+                  type="button"
+                  className="machine-card flex flex-col items-start gap-1 rounded border p-3 text-left hover:bg-gray-50"
+                  onClick={() => setSelectedMachine(machine)}
+                >
+                  <strong>{machine.name}</strong>
+                  <span className="text-sm text-gray-600">
+                    {machine.status}
+                  </span>
+                </button>
+              ))}
+            </div>
           )}
         </div>
 
-        <div className="machine-detail">
+        <div className="machine-detail mt-8 rounded border p-4">
           {selectedMachine ? (
             <>
-              <h2>{selectedMachine.name}</h2>
+              <h2 className="mb-3 text-xl font-semibold">
+                {selectedMachine.name}
+              </h2>
 
-              <dl>
-                <dt>Status</dt>
-                <dd>{selectedMachine.status}</dd>
+              <dl className="flex flex-col gap-2">
+                <div>
+                  <dt className="text-sm font-semibold text-gray-600">
+                    Status
+                  </dt>
+                  <dd>{selectedMachine.status}</dd>
+                </div>
 
-                <dt>Runtime</dt>
-                <dd>{selectedMachine.runtime}</dd>
+                <div>
+                  <dt className="text-sm font-semibold text-gray-600">
+                    Runtime
+                  </dt>
+                  <dd>{selectedMachine.runtime}</dd>
+                </div>
 
-                <dt>Location</dt>
-                <dd>{selectedMachine.location?.name ?? 'Unknown'}</dd>
+                <div>
+                  <dt className="text-sm font-semibold text-gray-600">
+                    Location
+                  </dt>
+                  <dd>{selectedMachine.location?.name ?? 'Unknown'}</dd>
+                </div>
 
-                <dt>Address</dt>
-                <dd>{selectedMachine.location?.address ?? 'Unknown'}</dd>
+                <div>
+                  <dt className="text-sm font-semibold text-gray-600">
+                    Address
+                  </dt>
+                  <dd>{selectedMachine.location?.address ?? 'Unknown'}</dd>
+                </div>
               </dl>
             </>
           ) : (
