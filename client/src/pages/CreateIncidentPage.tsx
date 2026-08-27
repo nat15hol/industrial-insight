@@ -26,6 +26,8 @@ function CreateIncidentPage() {
   const [machineId, setMachineId] = useState('')
   const [description, setDescription] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formError, setFormError] = useState<string | null>(null)
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -55,6 +57,18 @@ function CreateIncidentPage() {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
+    setFormError(null)
+    setSuccessMessage(null)
+
+    if (!machineId) {
+      setFormError('Please select a machine.')
+      return
+    }
+
+    if (description.trim().length === 0) {
+      setFormError('Please enter a description.')
+      return
+    }
 
     const token = localStorage.getItem('token')
     setIsSubmitting(true)
@@ -81,10 +95,15 @@ function CreateIncidentPage() {
         return response.json()
       })
       .then(() => {
-        navigate('/incidents')
+        setIsSubmitting(false)
+        setSuccessMessage('Incident reported. Redirecting...')
+        setTimeout(() => navigate('/incidents'), 2500)
       })
       .catch((error) => {
         console.error('Failed to create incident:', error)
+        setFormError(
+          'Something went wrong while reporting the incident. Please try again.',
+        )
         setIsSubmitting(false)
       })
   }
@@ -106,6 +125,18 @@ function CreateIncidentPage() {
             onSubmit={handleSubmit}
             className="mx-auto flex max-w-md flex-col gap-4"
           >
+            {formError && (
+              <p className="rounded border border-red-300 bg-red-50 p-2 text-sm text-red-700">
+                {formError}
+              </p>
+            )}
+
+            {successMessage && (
+              <p className="rounded border border-green-300 bg-green-50 p-2 text-sm text-green-700">
+                {successMessage}
+              </p>
+            )}
+
             <div className="flex flex-col gap-1">
               <label htmlFor="machine" className="text-sm font-semibold">
                 Machine
@@ -114,7 +145,6 @@ function CreateIncidentPage() {
                 id="machine"
                 value={machineId}
                 onChange={(event) => setMachineId(event.target.value)}
-                required
                 className="rounded border p-2"
               >
                 <option value="">Select a machine</option>
@@ -134,7 +164,6 @@ function CreateIncidentPage() {
                 id="description"
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
-                required
                 rows={5}
                 className="rounded border p-2"
               />

@@ -31,8 +31,10 @@ function IncidentsPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
+  const fetchIncidents = () => {
     const token = localStorage.getItem('token')
+    setIsLoading(true)
+    setError(null)
 
     fetch(`${API_BASE_URL}/api/Incident`, {
       headers: {
@@ -55,6 +57,10 @@ function IncidentsPage() {
         setError('Failed to load incidents.')
         setIsLoading(false)
       })
+  }
+
+  useEffect(() => {
+    fetchIncidents()
   }, [])
 
   return (
@@ -71,7 +77,16 @@ function IncidentsPage() {
           {isLoading ? (
             <p>Loading incidents...</p>
           ) : error ? (
-            <p>{error}</p>
+            <div className="flex flex-col items-start gap-2">
+              <p className="text-red-600">{error}</p>
+              <button
+                type="button"
+                onClick={fetchIncidents}
+                className="rounded border px-3 py-1 text-sm hover:bg-gray-50"
+              >
+                Retry
+              </button>
+            </div>
           ) : incidents.length === 0 ? (
             <p>No incidents found.</p>
           ) : (
@@ -98,7 +113,7 @@ function IncidentsPage() {
           )}
         </div>
 
-        <div className="incident-detail mt-8 rounded border p-4">
+        <div className="incident-detail mt-9 rounded border p-4">
           {selectedIncident ? (
             <>
               <h2 className="mb-3 text-xl font-semibold">
