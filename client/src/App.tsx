@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage'
 import MachinesPage from './pages/MachinesPage'
 import CreateIncidentPage from './pages/CreateIncidentPage'
 import IncidentsPage from './pages/IncidentsPage'
+import TasksPage from './pages/TasksPage'
+import AssignTaskPage from './pages/AssignTaskPage'
 import { AuthProvider } from './context/AuthContext'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
@@ -23,6 +25,8 @@ function App() {
               <Route path="/machines" element={<MachinesPage />} />
               <Route path="/incidents/new" element={<CreateIncidentPage />} />
               <Route path="/incidents" element={<IncidentsPage />} />
+              <Route path="/tasks/new" element={<AssignTaskPage />} />
+              <Route path="/tasks" element={<TasksPage />} />
             </Route>
           </Route>
         </Routes>

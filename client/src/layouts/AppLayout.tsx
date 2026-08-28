@@ -45,6 +45,27 @@ function AppLayout() {
             Report incident
           </NavLink>
 
+          <NavLink
+            to="/tasks"
+            end
+            className={({ isActive }) =>
+              isActive ? 'font-bold' : 'text-gray-600'
+            }
+          >
+            Tasks
+          </NavLink>
+
+          {user?.role === 'Manager' && (
+            <NavLink
+              to="/tasks/new"
+              className={({ isActive }) =>
+                isActive ? 'font-bold' : 'text-gray-600'
+              }
+            >
+              Assign task
+            </NavLink>
+          )}
+
           <div className="ml-auto flex items-center gap-3 text-sm">
             {isAuthenticated ? (
               <>

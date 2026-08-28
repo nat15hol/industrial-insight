@@ -5,6 +5,7 @@ type User = {
   name: string
   email: string
   roleId: number
+  role: string
 }
 
 type AuthContextType = {
@@ -21,7 +22,20 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<User | null>(() => {
+    const storedUser = localStorage.getItem('user')
+
+    if (!storedUser) {
+      return null
+    }
+
+    try {
+      return JSON.parse(storedUser) as User
+    } catch (error) {
+      console.error('Failed to parse stored user:', error)
+      return null
+    }
+  })
   const [token, setToken] = useState<string | null>(
     localStorage.getItem('token'),
   )
@@ -44,15 +58,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const data = await response.json()
 
-    localStorage.setItem('token', data.token)
-
-    setToken(data.token)
-    setUser({
+    const loggedInUser: User = {
       userId: data.userId,
       name: data.name,
       email: data.email,
       roleId: data.roleId,
-    })
+      role: data.role,
+    }
+
+    localStorage.setItem('token', data.token)
+    localStorage.setItem('user', JSON.stringify(loggedInUser))
+
+    setToken(data.token)
+    setUser(loggedInUser)
   }
 
   const register = async (
@@ -79,6 +97,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('user')
     setToken(null)
     setUser(null)
   }
