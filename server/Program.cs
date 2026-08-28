@@ -27,6 +27,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<IIncidentAiService, MockIncidentAiService>();
 
 var jwtSecret = builder.Configuration["Jwt:Secret"]
     ?? throw new InvalidOperationException("JWT secret is not configured.");
