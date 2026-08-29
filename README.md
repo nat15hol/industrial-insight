@@ -83,6 +83,8 @@ The underlying data (`dashboard/data.json`) is refreshed automatically
 via GitHub Actions whenever issues or milestones change — no GitHub
 token or manual updates required.
 
+**Note:** Dashboard data is updated automatically via GitHub Actions whenever an issue or milestone changes (e.g. when an issue is closed), or when the workflow is run manually. To see the latest data locally, make sure your local repository has pulled the updated `dashboard/data.json`, then use **Ctrl+F5** in the browser to force a refresh.
+
 Development runs August 17 – September 3, 2026 (18 days), with the presentation on September 4. Progress is tracked via one [GitHub Milestone](https://github.com/nat15hol/industrial-insight/milestones) per day, each scoped to a specific set of issues. The table below reflects the original plan at the start of development; see the dashboard above for current, live status.
 
 | Day | Milestone | Focus |
