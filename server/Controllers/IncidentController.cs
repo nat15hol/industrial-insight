@@ -5,7 +5,7 @@ using server.Data;
 using server.DTOs;
 using server.Models;
 using System.Security.Claims;
-
+using server.Services;
 namespace server.Controllers;
 
 [ApiController]
@@ -13,10 +13,17 @@ namespace server.Controllers;
 public class IncidentController : ControllerBase
 {
     private readonly AppDbContext _context;
+    private readonly IIncidentAiService _aiService;
+    private readonly IncidentAiSuggestionValidator _aiValidator;
 
-    public IncidentController(AppDbContext context)
+    public IncidentController(
+        AppDbContext context,
+        IIncidentAiService aiService,
+        IncidentAiSuggestionValidator aiValidator)
     {
         _context = context;
+        _aiService = aiService;
+        _aiValidator = aiValidator;
     }
 
     // GET: /api/Incident
@@ -86,10 +93,10 @@ public class IncidentController : ControllerBase
             return Unauthorized();
         }
         // Kontrollera att maskinen finns.
-        var machineExists = await _context.Machines
-            .AnyAsync(m => m.MachineId == request.MachineId);
+        var machine = await _context.Machines
+            .FirstOrDefaultAsync(m => m.MachineId == request.MachineId);
 
-        if (!machineExists)
+        if (machine == null)
         {
             return NotFound(
                 $"Machine with id {request.MachineId} was not found.");
@@ -105,14 +112,39 @@ public class IncidentController : ControllerBase
                 $"User with id {userId} was not found.");
         }
 
+        var aiCategory = request.Category;
+        var aiPriority = request.Priority;
+        var aiSuggestion = request.AiSuggestion;
+
+        try
+        {
+            var machineContext =
+                $"Name: {machine.Name}, Status: {machine.Status}, Runtime: {machine.Runtime}";
+
+            var suggestion = await _aiService.SuggestAsync(
+                request.Description,
+                machineContext);
+
+            if (suggestion != null && _aiValidator.IsValid(suggestion))
+            {
+                aiCategory = suggestion.Category;
+                aiPriority = suggestion.Priority;
+                aiSuggestion = suggestion.RecommendedAction;
+            }
+        }
+        catch
+        {
+            // AI failure should not prevent incident creation.
+        }
+
         // Skapa Incident-entiteten.
         var incident = new Incident
         {
             Description = request.Description,
             Status = request.Status,
-            Priority = request.Priority,
-            Category = request.Category,
-            AiSuggestion = request.AiSuggestion,
+            Category = aiCategory,
+            Priority = aiPriority,
+            AiSuggestion = aiSuggestion,
             CreatedAt = DateTime.UtcNow,
             ResolvedAt = request.ResolvedAt,
             MachineId = request.MachineId,

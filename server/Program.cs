@@ -28,6 +28,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<IIncidentAiService, MockIncidentAiService>();
+builder.Services.AddScoped<IncidentAiSuggestionValidator>();
 
 var jwtSecret = builder.Configuration["Jwt:Secret"]
     ?? throw new InvalidOperationException("JWT secret is not configured.");
@@ -54,6 +55,8 @@ builder.Services
         {
             OnAuthenticationFailed = context =>
             {
+                Console.WriteLine($"JWT AUTH FAILED: {context.Exception}");
+
                 context.NoResult();
 
                 var (error, message) = context.Exception switch
