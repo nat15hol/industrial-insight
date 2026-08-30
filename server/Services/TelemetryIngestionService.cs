@@ -42,26 +42,79 @@ public class TelemetryIngestionService : ITelemetryIngestionService
             using var csv = new CsvReader(reader, config);
             csv.Context.RegisterClassMap<TelemetryRecordMap>();
 
-            var seenRecords = new HashSet<(int MachineId, DateTime Timestamp)>();
+            // Validate required CSV headers before processing any records.
+            if (!await csv.ReadAsync())
+            {
+                throw new InvalidDataException("The CSV file is empty.");
+            }
+
+            csv.ReadHeader();
+
+            var requiredHeaders = new[]
+            {
+                "MachineId",
+                "Timestamp",
+                "Temperature",
+                "Pressure",
+                "Vibration",
+                "Energy"
+            };
+
+            foreach (var header in requiredHeaders)
+            {
+                if (csv.HeaderRecord is null ||
+                    !csv.HeaderRecord.Contains(header, StringComparer.OrdinalIgnoreCase))
+                {
+                    throw new InvalidDataException(
+                        $"Required CSV column '{header}' is missing.");
+                }
+            }
+
+            var processedKeys = new HashSet<(int MachineId, DateTime Timestamp)>();
 
             while (await csv.ReadAsync())
             {
                 pipelineRun.RecordsProcessed++;
+
+                var requiredFields = new[]
+                {
+                    "MachineId",
+                    "Timestamp",
+                    "Temperature",
+                    "Pressure",
+                    "Vibration",
+                    "Energy"
+                };
+
+                var hasMissingField = requiredFields.Any(field =>
+                {
+                    var index = csv.GetFieldIndex(field, isTryGet: true);
+                    return index < 0 || string.IsNullOrWhiteSpace(csv.GetField(index) ?? string.Empty);
+                });
+
+                if (hasMissingField)
+                {
+                    Console.WriteLine($"CSV REJECTED: Missing required value on row {csv.Context.Parser?.Row}");
+                    pipelineRun.RecordsRejected++;
+                    continue;
+                }
 
                 TelemetryRecord? record = null;
 
                 try
                 {
                     record = csv.GetRecord<TelemetryRecord>();
-                }
-                catch
-                {
-                    pipelineRun.RecordsRejected++;
-                    continue;
+
+                    if (record is null)
+                    {
+                        pipelineRun.RecordsRejected++;
+                        continue;
+                    }
                 }
 
-                if (!IsDomainValid(record))
+                catch (Exception ex)
                 {
+                    Console.WriteLine($"CSV REJECTED: {ex.Message}");
                     pipelineRun.RecordsRejected++;
                     continue;
                 }
@@ -71,13 +124,40 @@ public class TelemetryIngestionService : ITelemetryIngestionService
 
                 if (!machineExists)
                 {
+                    Console.WriteLine(
+                        $"REJECTED MACHINE: Machine={record.MachineId}, " +
+                        $"Timestamp={record.Timestamp:o}");
+
                     pipelineRun.RecordsRejected++;
                     continue;
                 }
 
-                var key = (record.MachineId, record.Timestamp);
+                if (!HasValidMeasurements(record))
+                {
+                    Console.WriteLine(
+                        $"REJECTED RANGE: Machine={record.MachineId}, " +
+                        $"Timestamp={record.Timestamp:o}, " +
+                        $"Temp={record.Temperature}, Pressure={record.Pressure}, " +
+                        $"Vibration={record.Vibration}, Energy={record.Energy}");
 
-                if (!seenRecords.Add(key))
+                    pipelineRun.RecordsRejected++;
+                    continue;
+                }
+
+                var recordKey = (record.MachineId, record.Timestamp);
+
+                if (!processedKeys.Add(recordKey))
+                {
+                    pipelineRun.Duplicates++;
+                    continue;
+                }
+
+                var duplicateExists = await _context.TelemetryRecords
+                    .AnyAsync(t =>
+                        t.MachineId == record.MachineId &&
+                        t.Timestamp == record.Timestamp);
+
+                if (duplicateExists)
                 {
                     pipelineRun.Duplicates++;
                     continue;
@@ -86,6 +166,11 @@ public class TelemetryIngestionService : ITelemetryIngestionService
                 _context.TelemetryRecords.Add(record);
                 pipelineRun.RecordsAccepted++;
             }
+
+            pipelineRun.DataQualityPct = pipelineRun.RecordsProcessed == 0
+                ? 0
+                : (float)(pipelineRun.RecordsAccepted + pipelineRun.Duplicates)
+                    / pipelineRun.RecordsProcessed * 100;
 
             pipelineRun.FinishedAt = DateTime.UtcNow;
             pipelineRun.Status = "Completed";
@@ -113,12 +198,17 @@ public class TelemetryIngestionService : ITelemetryIngestionService
             throw;
         }
     }
-
-    private static bool IsDomainValid(TelemetryRecord record)
+    private static bool HasValidMeasurements(TelemetryRecord record)
     {
-        return record.Temperature >= 0 && record.Temperature <= 120
-            && record.Pressure >= 0 && record.Pressure <= 10
-            && record.Vibration >= 0 && record.Vibration <= 5
-            && record.Energy >= 0 && record.Energy <= 30;
+        return record.Timestamp >= DateTime.UtcNow.AddYears(-10)
+            && record.Timestamp <= DateTime.UtcNow.AddDays(1)
+            && record.Temperature >= -50
+            && record.Temperature <= 150
+            && record.Pressure >= 0
+            && record.Pressure <= 20
+            && record.Vibration >= 0
+            && record.Vibration <= 10
+            && record.Energy >= 0
+            && record.Energy <= 100;
     }
 }

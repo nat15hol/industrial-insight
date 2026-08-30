@@ -1,0 +1,4 @@
+MachineId,Timestamp,Temperature,Pressure,Vibration,Energy
+1,2026-08-10T06:00:00Z,68.4,4.2,1.1,12.7
+1,2026-08-10T07:00:00Z,,4.3,1.2,12.9
+1,2026-08-10T08:00:00Z,not-a-number,4.3,1.2,12.9
