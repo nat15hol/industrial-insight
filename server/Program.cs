@@ -28,6 +28,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<IIncidentAiService, MockIncidentAiService>();
+builder.Services.AddScoped<ITelemetryIngestionService, TelemetryIngestionService>();
 builder.Services.AddScoped<IncidentAiSuggestionValidator>();
 
 var jwtSecret = builder.Configuration["Jwt:Secret"]
