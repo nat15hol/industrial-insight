@@ -169,7 +169,7 @@ public class TelemetryIngestionService : ITelemetryIngestionService
 
             pipelineRun.DataQualityPct = pipelineRun.RecordsProcessed == 0
                 ? 0
-                : (float)(pipelineRun.RecordsAccepted + pipelineRun.Duplicates)
+                : (float)pipelineRun.RecordsAccepted
                     / pipelineRun.RecordsProcessed * 100;
 
             pipelineRun.FinishedAt = DateTime.UtcNow;
