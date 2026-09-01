@@ -232,7 +232,7 @@
         "description": ""
       }
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignees": [],
     "milestone": {
@@ -265,18 +265,18 @@
         "user_view_type": "public",
         "site_admin": false
       },
-      "open_issues": 1,
-      "closed_issues": 2,
+      "open_issues": 0,
+      "closed_issues": 3,
       "state": "open",
       "created_at": "2026-08-14T21:04:03Z",
-      "updated_at": "2026-08-27T14:08:45Z",
+      "updated_at": "2026-09-01T09:44:51Z",
       "due_on": "2026-08-23T00:00:00Z",
       "closed_at": null
     },
-    "comments": 0,
+    "comments": 1,
     "created_at": "2026-08-23T12:04:41Z",
-    "updated_at": "2026-08-23T12:04:41Z",
-    "closed_at": null,
+    "updated_at": "2026-09-01T09:44:51Z",
+    "closed_at": "2026-09-01T09:44:51Z",
     "assignee": null,
     "author_association": "OWNER",
     "active_lock_reason": null,
@@ -292,7 +292,27 @@
       "total_blocking": 0
     },
     "body": "## Problem\n\n`GET /api/Machine/{id}` throws a `System.Text.Json.JsonException` due to a\ndetected object cycle when serializing the response.\n\n## Error\n\nSystem.Text.Json.JsonException: A possible object cycle was detected. This\ncan either be due to a cycle or if the object depth is larger than the\nmaximum allowed depth of 32.\nPath: $.Location.Machines.Location.Machines.Location.Machines...\n\n## Root cause (likely)\n\n`GetMachine(int id)` in `MachineController.cs` returns the raw `Machine`\nentity (including `.Include(m => m.Location)`) directly, instead of mapping\nit to a DTO like `MachineResponse`:\n\n    var machine = await _context.Machines\n        .Include(m => m.Location)\n        .FirstOrDefaultAsync(m => m.MachineId == id);\n\n    return machine;\n\nSince `Machine.Location` likely has a navigation collection back to\n`Location.Machines`, the serializer enters a cycle:\n`Machine \u2192 Location \u2192 Machines \u2192 Location \u2192 Machines \u2192 ...`\n\nThis differs from `GetMachines()` (the list endpoint), which maps each\nmachine to a `MachineResponse` DTO and does not exhibit this issue.\n\n## Impact\n\n- `GET /api/Machine/{id}` is broken for all roles (Technician and Manager\n  both affected \u2014 this is not an authorization issue).\n- Discovered incidentally during #7 checkpoint verification while\n  confirming a Manager-created test machine (`machineId: 2`) after a PUT\n  update. The list endpoint (`GET /api/Machine`) was used as a workaround\n  to confirm state instead.\n\n## Suggested fix\n\nMap the result to `MachineResponse` (or an equivalent DTO) in\n`GetMachine(int id)`, consistent with `GetMachines()`, so the response\ndoes not include the cyclical `Location.Machines` navigation.\n\n## Not blocking #7\n\nThis does not block Checkpoint 1 (#7), since the E2E verification only\nrelied on the list endpoint (`GET /api/Machine`), which functions\ncorrectly. Flagged here for follow-up during Milestone 6+ work.",
-    "closed_by": null,
+    "closed_by": {
+      "login": "nat15hol",
+      "id": 47388094,
+      "node_id": "MDQ6VXNlcjQ3Mzg4MDk0",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47388094?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nat15hol",
+      "html_url": "https://github.com/nat15hol",
+      "followers_url": "https://api.github.com/users/nat15hol/followers",
+      "following_url": "https://api.github.com/users/nat15hol/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nat15hol/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nat15hol/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nat15hol/subscriptions",
+      "organizations_url": "https://api.github.com/users/nat15hol/orgs",
+      "repos_url": "https://api.github.com/users/nat15hol/repos",
+      "events_url": "https://api.github.com/users/nat15hol/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nat15hol/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
     "reactions": {
       "url": "https://api.github.com/repos/nat15hol/industrial-insight/issues/77/reactions",
       "total_count": 0,
@@ -307,7 +327,7 @@
     },
     "timeline_url": "https://api.github.com/repos/nat15hol/industrial-insight/issues/77/timeline",
     "performed_via_github_app": null,
-    "state_reason": null,
+    "state_reason": "completed",
     "pinned_comment": null
   },
   {
@@ -10361,11 +10381,11 @@
         "user_view_type": "public",
         "site_admin": false
       },
-      "open_issues": 1,
-      "closed_issues": 2,
+      "open_issues": 0,
+      "closed_issues": 3,
       "state": "open",
       "created_at": "2026-08-14T21:04:03Z",
-      "updated_at": "2026-08-27T14:08:45Z",
+      "updated_at": "2026-09-01T09:44:51Z",
       "due_on": "2026-08-23T00:00:00Z",
       "closed_at": null
     },
@@ -10511,11 +10531,11 @@
         "user_view_type": "public",
         "site_admin": false
       },
-      "open_issues": 1,
-      "closed_issues": 2,
+      "open_issues": 0,
+      "closed_issues": 3,
       "state": "open",
       "created_at": "2026-08-14T21:04:03Z",
-      "updated_at": "2026-08-27T14:08:45Z",
+      "updated_at": "2026-09-01T09:44:51Z",
       "due_on": "2026-08-23T00:00:00Z",
       "closed_at": null
     },
