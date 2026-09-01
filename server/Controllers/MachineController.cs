@@ -46,14 +46,30 @@ public class MachineController : ControllerBase
         return machines;
     }
 
-    // GET: /api/Machine/{id}
     [HttpGet("{id}")]
     [Authorize]
-    public async Task<ActionResult<Machine>> GetMachine(int id)
+    public async Task<ActionResult<MachineResponse>> GetMachine(int id)
     {
         var machine = await _context.Machines
             .Include(m => m.Location)
-            .FirstOrDefaultAsync(m => m.MachineId == id);
+            .Where(m => m.MachineId == id)
+            .Select(m => new MachineResponse
+            {
+                MachineId = m.MachineId,
+                Name = m.Name,
+                Status = m.Status,
+                Runtime = m.Runtime,
+                LocationId = m.LocationId,
+                Location = m.Location == null
+                    ? null
+                    : new LocationResponse
+                    {
+                        LocationId = m.Location.LocationId,
+                        Name = m.Location.Name,
+                        Address = m.Location.Address
+                    }
+            })
+            .FirstOrDefaultAsync();
 
         if (machine == null)
         {
