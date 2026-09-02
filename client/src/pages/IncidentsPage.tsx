@@ -10,6 +10,7 @@ type Incident = {
   createdAt: string
   resolvedAt: string | null
   machineId: number
+  machineName: string
   reportedByUserId: number
 }
 
@@ -98,7 +99,9 @@ function IncidentsPage() {
                   className="incident-card flex flex-col items-start gap-1 rounded border p-3 text-left hover:bg-gray-50"
                   onClick={() => setSelectedIncident(incident)}
                 >
-                  <strong>Machine #{incident.machineId}</strong>
+                  <strong>
+                    Incident #{incident.incidentId} — {incident.machineName}
+                  </strong>
                   <span>{truncate(incident.description, 60)}</span>
                   <span className="flex gap-2 text-sm text-gray-600">
                     <span>{incident.status}</span>
@@ -125,7 +128,7 @@ function IncidentsPage() {
                   <dt className="text-sm font-semibold text-gray-600">
                     Machine
                   </dt>
-                  <dd>Machine #{selectedIncident.machineId}</dd>
+                  <dd>{selectedIncident.machineName}</dd>
                 </div>
 
                 <div>
