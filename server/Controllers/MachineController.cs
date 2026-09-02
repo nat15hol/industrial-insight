@@ -128,8 +128,6 @@ public class MachineController : ControllerBase
             .ToListAsync();
 
         return telemetry;
-    }
-
 
     }
 
