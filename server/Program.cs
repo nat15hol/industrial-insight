@@ -30,6 +30,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<IIncidentAiService, MockIncidentAiService>();
 builder.Services.AddScoped<ITelemetryIngestionService, TelemetryIngestionService>();
 builder.Services.AddScoped<IncidentAiSuggestionValidator>();
+builder.Services.AddScoped<PriorityScoreService>();
 
 var jwtSecret = builder.Configuration["Jwt:Secret"]
     ?? throw new InvalidOperationException("JWT secret is not configured.");

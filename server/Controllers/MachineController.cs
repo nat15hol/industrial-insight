@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.DTOs;
 using server.Models;
+using server.Services;
 
 namespace server.Controllers;
 
@@ -12,10 +13,14 @@ namespace server.Controllers;
 public class MachineController : ControllerBase
 {
     private readonly AppDbContext _context;
+    private readonly PriorityScoreService _priorityScoreService;
 
-    public MachineController(AppDbContext context)
+    public MachineController(
+        AppDbContext context,
+        PriorityScoreService priorityScoreService)
     {
         _context = context;
+        _priorityScoreService = priorityScoreService;
     }
 
     // GET: /api/Machine
@@ -25,7 +30,14 @@ public class MachineController : ControllerBase
     {
         var machines = await _context.Machines
             .Include(m => m.Location)
-            .Select(m => new MachineResponse
+            .Include(m => m.Incidents)
+            .ToListAsync();
+
+        var responses = machines.Select(m =>
+        {
+            var priority = _priorityScoreService.Calculate(m.Incidents);
+
+            return new MachineResponse
             {
                 MachineId = m.MachineId,
                 Name = m.Name,
@@ -39,11 +51,13 @@ public class MachineController : ControllerBase
                         LocationId = m.Location.LocationId,
                         Name = m.Location.Name,
                         Address = m.Location.Address
-                    }
-            })
-            .ToListAsync();
+                    },
+                PriorityScore = priority.Score,
+                PriorityBucket = priority.Bucket
+            };
+        }).ToList();
 
-        return machines;
+        return responses;
     }
 
     [HttpGet("{id}")]
@@ -52,24 +66,8 @@ public class MachineController : ControllerBase
     {
         var machine = await _context.Machines
             .Include(m => m.Location)
-            .Where(m => m.MachineId == id)
-            .Select(m => new MachineResponse
-            {
-                MachineId = m.MachineId,
-                Name = m.Name,
-                Status = m.Status,
-                Runtime = m.Runtime,
-                LocationId = m.LocationId,
-                Location = m.Location == null
-                    ? null
-                    : new LocationResponse
-                    {
-                        LocationId = m.Location.LocationId,
-                        Name = m.Location.Name,
-                        Address = m.Location.Address
-                    }
-            })
-            .FirstOrDefaultAsync();
+            .Include(m => m.Incidents)
+            .FirstOrDefaultAsync(m => m.MachineId == id);
 
         if (machine == null)
         {

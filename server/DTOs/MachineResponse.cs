@@ -8,6 +8,9 @@ public class MachineResponse
     public float Runtime { get; set; }
     public int LocationId { get; set; }
     public LocationResponse? Location { get; set; }
+
+    public float PriorityScore { get; set; }
+    public string PriorityBucket { get; set; } = string.Empty;
 }
 
 public class LocationResponse

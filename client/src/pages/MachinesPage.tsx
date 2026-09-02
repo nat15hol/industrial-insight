@@ -13,6 +13,18 @@ type Machine = {
   runtime: number
   locationId: number
   location: Location | null
+  priorityScore: number
+  priorityBucket: string
+}
+
+type TelemetryRecord = {
+  telemetryRecordId: number
+  timestamp: string
+  temperature: number
+  pressure: number
+  vibration: number
+  energy: number
+  machineId: number
 }
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -105,6 +117,15 @@ function MachinesPage() {
                     Runtime
                   </dt>
                   <dd>{selectedMachine.runtime}</dd>
+                </div>
+
+                <div>
+                  <dt className="text-sm font-semibold text-gray-600">
+                    Priority Score
+                  </dt>
+                  <dd>
+                    {selectedMachine.priorityScore} ({selectedMachine.priorityBucket})
+                  </dd>
                 </div>
 
                 <div>
