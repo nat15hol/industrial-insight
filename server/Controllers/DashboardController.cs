@@ -33,6 +33,28 @@ public class DashboardController : ControllerBase
             OpenIncidents = openIncidents
         });
     }
+    // GET: /api/Dashboard/problematic-machines
+    [HttpGet("problematic-machines")]
+    public async Task<ActionResult<IEnumerable<ProblematicMachineResponse>>> GetProblematicMachines()
+    {
+        var cutoff = DateTime.UtcNow.AddDays(-7);
+
+        var machines = await _context.Machines
+            .Where(m =>
+                m.Incidents.Count(i => i.Status == "Open") >= 2
+                || m.Incidents.Any(i =>
+                    i.Status == "Open"
+                    && i.Priority == "High"
+                    && i.CreatedAt >= cutoff))
+            .Select(m => new ProblematicMachineResponse
+            {
+                MachineId = m.MachineId,
+                MachineName = m.Name
+            })
+            .ToListAsync();
+
+        return Ok(machines);
+    }
     // GET: /api/Dashboard/pipeline
     [HttpGet("pipeline")]
     public async Task<ActionResult<LatestPipelineResponse>> GetLatestPipeline()
