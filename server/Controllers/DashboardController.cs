@@ -55,6 +55,35 @@ public class DashboardController : ControllerBase
 
         return Ok(machines);
     }
+    // GET: /api/Dashboard/average-resolution-time
+    [HttpGet("average-resolution-time")]
+    public async Task<ActionResult<AverageResolutionTimeResponse>> GetAverageResolutionTime()
+    {
+        var resolvedIncidents = await _context.Incidents
+            .Where(i => i.ResolvedAt != null)
+            .Select(i => new
+            {
+                i.CreatedAt,
+                ResolvedAt = i.ResolvedAt!.Value
+            })
+            .ToListAsync();
+
+        if (resolvedIncidents.Count == 0)
+        {
+            return Ok(new AverageResolutionTimeResponse
+            {
+                AverageResolutionTimeHours = 0
+            });
+        }
+
+        var averageHours = resolvedIncidents
+            .Average(i => (i.ResolvedAt - i.CreatedAt).TotalHours);
+
+        return Ok(new AverageResolutionTimeResponse
+        {
+            AverageResolutionTimeHours = averageHours
+        });
+    }
     // GET: /api/Dashboard/pipeline
     [HttpGet("pipeline")]
     public async Task<ActionResult<LatestPipelineResponse>> GetLatestPipeline()
