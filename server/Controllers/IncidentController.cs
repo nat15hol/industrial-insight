@@ -43,6 +43,7 @@ public class IncidentController : ControllerBase
                 CreatedAt = i.CreatedAt,
                 ResolvedAt = i.ResolvedAt,
                 MachineId = i.MachineId,
+                MachineName = i.Machine == null ? string.Empty : i.Machine.Name,
                 ReportedByUserId = i.ReportedByUserId
             })
             .ToListAsync();
@@ -68,6 +69,7 @@ public class IncidentController : ControllerBase
                 CreatedAt = i.CreatedAt,
                 ResolvedAt = i.ResolvedAt,
                 MachineId = i.MachineId,
+                MachineName = i.Machine == null ? string.Empty : i.Machine.Name,
                 ReportedByUserId = i.ReportedByUserId
             })
             .FirstOrDefaultAsync();
@@ -166,6 +168,7 @@ public class IncidentController : ControllerBase
             CreatedAt = incident.CreatedAt,
             ResolvedAt = incident.ResolvedAt,
             MachineId = incident.MachineId,
+            MachineName = machine.Name,
             ReportedByUserId = incident.ReportedByUserId
         };
 
@@ -183,6 +186,7 @@ public class IncidentController : ControllerBase
         UpdateIncidentRequest request)
     {
         var incident = await _context.Incidents
+            .Include(i => i.Machine)
             .FirstOrDefaultAsync(i => i.IncidentId == id);
 
         if (incident == null)
@@ -209,6 +213,7 @@ public class IncidentController : ControllerBase
             CreatedAt = incident.CreatedAt,
             ResolvedAt = incident.ResolvedAt,
             MachineId = incident.MachineId,
+            MachineName = incident.Machine?.Name ?? string.Empty,
             ReportedByUserId = incident.ReportedByUserId
         };
 

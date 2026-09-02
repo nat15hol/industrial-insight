@@ -11,5 +11,6 @@ public class IncidentResponse
     public DateTime CreatedAt { get; set; }
     public DateTime? ResolvedAt { get; set; }
     public int MachineId { get; set; }
+    public string MachineName { get; set; } = string.Empty;
     public int ReportedByUserId { get; set; }
 }
