@@ -17,16 +17,6 @@ type Machine = {
   priorityBucket: string
 }
 
-type TelemetryRecord = {
-  telemetryRecordId: number
-  timestamp: string
-  temperature: number
-  pressure: number
-  vibration: number
-  energy: number
-  machineId: number
-}
-
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 function MachinesPage() {

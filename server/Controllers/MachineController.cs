@@ -74,7 +74,28 @@ public class MachineController : ControllerBase
             return NotFound();
         }
 
-        return machine;
+        var priority = _priorityScoreService.Calculate(machine.Incidents);
+
+        var response = new MachineResponse
+        {
+            MachineId = machine.MachineId,
+            Name = machine.Name,
+            Status = machine.Status,
+            Runtime = machine.Runtime,
+            LocationId = machine.LocationId,
+            Location = machine.Location == null
+                ? null
+                : new LocationResponse
+                {
+                    LocationId = machine.Location.LocationId,
+                    Name = machine.Location.Name,
+                    Address = machine.Location.Address
+                },
+            PriorityScore = priority.Score,
+            PriorityBucket = priority.Bucket
+        };
+
+        return response;
     }
 
     // POST: /api/Machine
