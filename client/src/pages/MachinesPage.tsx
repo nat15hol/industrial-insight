@@ -22,8 +22,11 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 function MachinesPage() {
   const [machines, setMachines] = useState<Machine[]>([])
   const [selectedMachine, setSelectedMachine] = useState<Machine | null>(null)
+  const [telemetry, setTelemetry] = useState<TelemetryRecord[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [isTelemetryLoading, setIsTelemetryLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [telemetryError, setTelemetryError] = useState<string | null>(null)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -51,6 +54,38 @@ function MachinesPage() {
       })
   }, [])
 
+  const handleMachineSelect = async (machine: Machine) => {
+    setSelectedMachine(machine)
+    setTelemetry([])
+    setTelemetryError(null)
+    setIsTelemetryLoading(true)
+
+    const token = localStorage.getItem('token')
+
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/api/Machine/${machine.machineId}/telemetry`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`)
+      }
+
+      const data: TelemetryRecord[] = await response.json()
+      setTelemetry(data)
+    } catch (error) {
+      console.error('Failed to fetch telemetry:', error)
+      setTelemetryError('Failed to load telemetry.')
+    } finally {
+      setIsTelemetryLoading(false)
+    }
+  }
+
   return (
     <main className="machine-page">
       <header className="page-header">
@@ -75,7 +110,7 @@ function MachinesPage() {
                   key={machine.machineId}
                   type="button"
                   className="machine-card flex flex-col items-start gap-1 rounded border p-3 text-left hover:bg-gray-50"
-                  onClick={() => setSelectedMachine(machine)}
+                  onClick={() => handleMachineSelect(machine)}
                 >
                   <strong>{machine.name}</strong>
                   <span className="text-sm text-gray-600">
@@ -94,7 +129,7 @@ function MachinesPage() {
                 {selectedMachine.name}
               </h2>
 
-              <dl className="flex flex-col gap-2">
+              <dl className="mb-6 flex flex-col gap-2">
                 <div>
                   <dt className="text-sm font-semibold text-gray-600">
                     Status
@@ -132,6 +167,46 @@ function MachinesPage() {
                   <dd>{selectedMachine.location?.address ?? 'Unknown'}</dd>
                 </div>
               </dl>
+
+              <h3 className="mb-3 text-lg font-semibold">Telemetry</h3>
+
+              {isTelemetryLoading ? (
+                <p>Loading telemetry...</p>
+              ) : telemetryError ? (
+                <p>{telemetryError}</p>
+              ) : telemetry.length === 0 ? (
+                <p>No telemetry records found.</p>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse text-sm">
+                    <thead>
+                      <tr className="border-b text-left">
+                        <th className="p-2">Timestamp</th>
+                        <th className="p-2">Temperature</th>
+                        <th className="p-2">Pressure</th>
+                        <th className="p-2">Vibration</th>
+                        <th className="p-2">Energy</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {telemetry.map((record) => (
+                        <tr
+                          key={record.telemetryRecordId}
+                          className="border-b"
+                        >
+                          <td className="p-2">
+                            {new Date(record.timestamp).toLocaleString()}
+                          </td>
+                          <td className="p-2">{record.temperature}</td>
+                          <td className="p-2">{record.pressure}</td>
+                          <td className="p-2">{record.vibration}</td>
+                          <td className="p-2">{record.energy}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </>
           ) : (
             <p>Select a machine to view its details.</p>

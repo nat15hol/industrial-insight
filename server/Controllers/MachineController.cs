@@ -96,6 +96,41 @@ public class MachineController : ControllerBase
         };
 
         return response;
+
+    }
+
+    // GET: /api/Machine/{id}/telemetry
+    [HttpGet("{id}/telemetry")]
+    [Authorize]
+    public async Task<ActionResult<IEnumerable<TelemetryRecordResponse>>> GetMachineTelemetry(int id)
+    {
+        var machineExists = await _context.Machines
+            .AnyAsync(m => m.MachineId == id);
+
+        if (!machineExists)
+        {
+            return NotFound();
+        }
+
+        var telemetry = await _context.TelemetryRecords
+            .Where(t => t.MachineId == id)
+            .OrderBy(t => t.Timestamp)
+            .Select(t => new TelemetryRecordResponse
+            {
+                TelemetryRecordId = t.TelemetryRecordId,
+                Timestamp = t.Timestamp,
+                Temperature = t.Temperature,
+                Pressure = t.Pressure,
+                Vibration = t.Vibration,
+                Energy = t.Energy,
+                MachineId = t.MachineId
+            })
+            .ToListAsync();
+
+        return telemetry;
+    }
+
+
     }
 
     // POST: /api/Machine
