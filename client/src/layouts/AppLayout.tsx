@@ -5,7 +5,7 @@ function AppLayout() {
   const { isAuthenticated, user, logout } = useAuth()
 
   return (
-    <div className="min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <header className="border-b">
         <nav className="mx-auto flex max-w-6xl items-center gap-6 px-6 py-4">
           <NavLink
@@ -95,9 +95,21 @@ function AppLayout() {
         </nav>
       </header>
 
-      <main className="mx-auto max-w-6xl px-6 py-8">
+      <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-8 pb-16">
         <Outlet />
       </main>
+
+      <footer
+        className="fixed bottom-0 left-1/2 w-full max-w-[1126px] -translate-x-1/2 border-t"
+        style={{ background: 'var(--bg)' }}
+      >
+        <div className="mx-auto max-w-6xl px-6 py-4 text-sm opacity-70">
+          Industrial Insight · Prototype · v0.1 ·{' '}
+          <NavLink to="/privacy" className="underline">
+            Privacy Notice
+          </NavLink>
+        </div>
+      </footer>
     </div>
   )
 }
