@@ -3,12 +3,12 @@
 ![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet&logoColor=white)
 ![React](https://img.shields.io/badge/React-TypeScript-61DAFB?logo=react&logoColor=white)
 ![SQL Server](https://img.shields.io/badge/SQL_Server-EF_Core-CC2927?logo=microsoftsqlserver&logoColor=white)
-![Status](https://img.shields.io/badge/status-in_development-yellow)
+![Status](https://img.shields.io/badge/status-presentation_ready)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 **A maintenance prioritization platform for industrial operations**
 
-Industrial Insight helps maintenance teams identify which machines need attention first — and understand why. It combines machine telemetry, technician incident reports, and maintenance history into a single prioritization workflow, so managers can act on the most urgent problems instead of digging through scattered data sources.
+Industrial Insight helps maintenance teams identify which machines need attention first — and understand why. It combines machine telemetry, technician incident reports, and maintenance tasks into a single prioritization workflow, so managers can act on the most urgent problems instead of digging through scattered data sources.
 
 The system is designed to sit on top of existing operational data and workflows, adding a transparent intelligence layer rather than replacing existing tools.
 
@@ -58,7 +58,7 @@ Industrial Insight answers these questions through one continuous workflow:
 
 **Machine telemetry + incident reports → data quality validation → priority scoring → AI-assisted assessment → maintenance action → resolution & analytics**
 
-Each machine receives a transparent, explainable Priority Score based on open incidents, severity, and recurrence — so the team always knows not just *what* needs attention, but *why*.
+Each machine receives a transparent, explainable Machine Priority Score based on open incidents, presence of a High-priority open incident, and recurrence within the same category — so the team always knows not just *what* needs attention, but *why*.
 
 **Target users:** small and mid-sized manufacturers operating multiple industrial machines, where maintenance information currently lives in spreadsheets, informal notes, or disconnected systems.
 
@@ -70,7 +70,7 @@ The AI-assisted incident assessment is an optional decision-support layer and is
 
 ## Project Status
 
-**Current status (Checkpoint 1):** MVP under development. The project has a stable technical foundation and a functioning prototype, while core product functionality is still being implemented and integrated.
+**Current status:** Final stabilization and presentation preparation. The core MVP is implemented and validated through backend testing, data-pipeline validation, AI fallback testing, and frontend integration. Final work is focused on stabilization, documentation, and presentation readiness.
 
 **Live status:** for up-to-date issue counts, milestone progress, and
 scope tracking, run the project dashboard locally:
@@ -109,7 +109,7 @@ Development runs August 17 – September 3, 2026 (18 days), with the presentatio
 | 18 | [Final Stabilization & Presentation Prep](https://github.com/nat15hol/industrial-insight/milestone/18) | Freeze, docs, demo rehearsal |
 | 19 | — | Presentation Day |
 
-> Per the project's Day 18 Freeze Rule, if the system is unstable at the end of Day 18, the last stable state verified at Checkpoint 2 (Day 14) becomes the presentation baseline — see [known-limitations.md](known-limitations.md).
+> Per the project's Day 18 Freeze Rule, if the system is unstable at the end of Day 18, the last stable state verified at Checkpoint 2 (Day 14) becomes the presentation baseline — see [known-limitations.md](docs/known-limitations.md).
 
 ---
 
@@ -147,17 +147,16 @@ Incident reporting and management work independently of the optional AI function
 
 ### Priority Score
 
-Each machine is assigned a transparent Priority Score based on:
+Each machine is assigned a transparent Machine Priority Score based on:
 
 - number of open incidents
-- incident severity
-- unresolved issue count
-- recurrence of similar problems
+- presence of a High-priority open incident
+- recurrence of incidents within the same category
 
 Example:
 
 ```text
-Machine A — Priority 82/100 — HIGH
+Machine A — Machine Priority Score 82/100 — HIGH
 3 unresolved incidents · recurring issue
 Recommended action: Inspect bearing assembly
 [Create maintenance task]
@@ -172,11 +171,10 @@ AI-assisted assessment is an optional **P1 enhancement** that feeds into the cor
 When available, it analyzes an incident description and provides structured suggestions for:
 
 - Category
-- Priority
+- Incident Priority
 - Recommended action
-- A short, description-based rationale (e.g. "description indicates abnormal vibration pattern")
 
-These suggestions feed directly into the machine's Priority Score. The Technician reviews and can accept or edit the suggestion before it is saved.
+These suggestions can influence the incident data used when calculating the machine's Machine Priority Score. The Technician reviews and can accept or edit the suggestion before it is saved.
 
 AI output is treated as **untrusted external input** and is validated against a defined C# validation schema before being used by the application.
 
@@ -189,8 +187,6 @@ The AI functionality can be implemented using:
 - An optional external AI provider such as OpenAI or Anthropic
 
 **No paid AI service is required to run or demonstrate the core application.**
-
-Note: the AI rationale is based on the incident description text only. It does not compare against historical incidents unless that capability is explicitly implemented and documented.
 
 ## Maintenance Tasks
 
@@ -283,10 +279,10 @@ At a high level, Industrial Insight consists of:
 
 For the detailed architecture, see:
 
-- [Architecture](architecture.md)
-- [Database](database.md)
-- [API Contract](api-contract.md)
-- [Dataset Specification](dataset-specification.md)
+- [Architecture](docs/architecture.md)
+- [Database](docs/database.md)
+- [API Contract](docs/api-contract.md)
+- [Dataset Specification](docs/dataset-specification.md)
 
 ## Technology Stack
 
@@ -295,7 +291,6 @@ For the detailed architecture, see:
 - C#
 - ASP.NET Core Web API
 - Entity Framework Core
-- ASP.NET Identity
 - JWT authentication
 - REST API
 
@@ -306,7 +301,6 @@ For the detailed architecture, see:
 - Vite
 - Tailwind CSS
 - React Router
-- Recharts, where applicable
 
 ### Data Engineering
 
@@ -409,7 +403,7 @@ The primary measurements are:
 
 For the complete dataset definition and validation rules, see:
 
-[Dataset Specification](dataset-specification.md)
+[Dataset Specification](docs/dataset-specification.md)
 
 ## Data Quality
 
@@ -479,8 +473,8 @@ Users
 
 For the complete database design and schema, see:
 
-- [Database Documentation](database.md)
-- [ERD](erd.md)
+- [Database Documentation](docs/database.md)
+- [ERD](docs/erd.md)
 
 ## User Roles
 
@@ -535,7 +529,7 @@ Technician reports incident
           ↓
      AI analysis
           ↓
-Category / Priority /
+Category / Incident Priority /
 Recommended Action
           ↓
 Technician reviews/edits
@@ -594,11 +588,7 @@ Number of incidents that have not been resolved.
 A machine is considered problematic if it has either:
 
 - At least 2 open incidents, or
-- At least 1 critical incident
-
-during the selected reporting period.
-
-The default reporting period is the most recent 7 days unless otherwise specified by the dashboard implementation.
+- At least 1 open High-priority incident created within the last 7 days
 
 ### Average resolution time
 
@@ -625,7 +615,7 @@ The data-quality percentage calculated during the pipeline execution.
 
 Detailed setup instructions are maintained separately in:
 
-[`setup.md`](setup.md)
+[`setup.md`](docs/setup.md)
 
 The documented setup should allow a developer to start the project from a clean environment, including:
 
@@ -640,7 +630,7 @@ The documented setup should allow a developer to start the project from a clean 
 
 ### Prerequisites
 
-The project requires the development environment specified in [`setup.md`](setup.md).
+The project requires the development environment specified in [`setup.md`](docs/setup.md).
 
 Expected core dependencies include:
 
@@ -672,19 +662,19 @@ The frontend uses a `.env.example` template for its own local configuration (e.g
 
 ```
 
-Copy the example configuration into a local `.env` file and provide the required values according to the instructions in [`setup.md`](setup.md).
+Copy the example configuration into a local `.env` file and provide the required values according to the instructions in [`setup.md`](docs/setup.md).
 
 If an external AI provider is used, its API key must be configured through User Secrets (or environment variables in production) and must never be committed to source control.
 
 Secrets and API keys must never be committed to source control.
 
-For security-related guidance, see `security.md`. **Not yet created** — will be added once concrete security implementation exists to document (see [`known-limitations.md`](known-limitations.md)). In the meantime, baseline security measures are described in [`architecture.md`](architecture.md).
+For security-related guidance, see `security.md`. **Not yet created** — will be added once concrete security implementation exists to document (see [`known-limitations.md`](docs/known-limitations.md)). In the meantime, baseline security measures are described in [`architecture.md`](docs/architecture.md).
 
 ## Running the Application
 
 The exact commands for running the backend, frontend, database and pipeline are documented in:
 
-[`setup.md`](setup.md)
+[`setup.md`](docs/setup.md)
 
 The intended local development environment consists of:
 
@@ -724,7 +714,7 @@ The core incident workflow must be tested independently of AI availability.
 
 Run the tests according to the commands documented in:
 
-[`testing.md`](testing.md)
+[`testing.md`](docs/testing.md)
 
 ## Security
 
@@ -740,7 +730,7 @@ Security considerations include:
 
 The AI service, when enabled, is treated as an untrusted external dependency. AI output is validated before being used by the application.
 
-For more information, see `security.md`. **Not yet created** — added once concrete security implementation exists to document. In the meantime, see [`architecture.md`](architecture.md) for the baseline security model and [`known-limitations.md`](known-limitations.md) for current status.
+For more information, see `security.md`. **Not yet created** — added once concrete security implementation exists to document. In the meantime, see [`architecture.md`](docs/architecture.md) for the baseline security model and [`known-limitations.md`](docs/known-limitations.md) for current status.
 
 ## Documentation
 
@@ -748,20 +738,20 @@ The repository contains additional documentation for different aspects of the pr
 
 | **Document**                              | **Description**                                                   |
 | ------------------------------------------ | ------------------------------------------------------------------ |
-| [`architecture.md`](architecture.md)       | System architecture and technical design                          |
-| [`api-contract.md`](api-contract.md)       | REST API contract and endpoint expectations                       |
-| [`database.md`](database.md)               | Database structure, relationships and persistence                 |
-| [`erd.md`](erd.md)                         | Entity relationship diagram                                       |
-| [`sequence-diagrams.md`](sequence-diagrams.md) | Sequence diagrams for login/auth and the AI-assisted assessment flow |
-| [`dataset-specification.md`](dataset-specification.md) | Synthetic telemetry dataset and validation rules      |
-| [`UI_Specification.md`](UI_Specification.md) | UI layout specification and wireframes for key screens          |
-| [`setup.md`](setup.md)                     | Local development and setup instructions                          |
-| [`testing.md`](testing.md)                 | Testing instructions and test strategy                            |
-| [`known-limitations.md`](known-limitations.md) | Known limitations and production gaps                         |
-| [`changelog.md`](changelog.md)             | Project documentation change history                              |
-| [`decisions/`](decisions/)                 | Architecture Decision Records (ADRs)                               |
-| [`project-product-specification.md`](project-product-specification.md) | Product requirements and project specification |
-| [`student-pre-project-planning-template.md`](student-pre-project-planning-template.md) | Detailed day-by-day execution plan and checkpoints |
+| [`architecture.md`](docs/architecture.md)       | System architecture and technical design                          |
+| [`api-contract.md`](docs/api-contract.md)       | REST API contract and endpoint expectations                       |
+| [`database.md`](docs/database.md)               | Database structure, relationships and persistence                 |
+| [`erd.md`](docs/erd.md)                         | Entity relationship diagram                                       |
+| [`sequence-diagrams.md`](docs/sequence-diagrams.md) | Sequence diagrams for login/auth and the AI-assisted assessment flow |
+| [`dataset-specification.md`](docs/dataset-specification.md) | Synthetic telemetry dataset and validation rules      |
+| [`UI_Specification.md`](docs/UI_Specification.md) | UI layout specification and wireframes for key screens          |
+| [`setup.md`](docs/setup.md)                     | Local development and setup instructions                          |
+| [`testing.md`](docs/testing.md)                 | Testing instructions and test strategy                            |
+| [`known-limitations.md`](docs/known-limitations.md) | Known limitations and production gaps                         |
+| [`changelog.md`](docs/changelog.md)             | Project documentation change history                              |
+| [`decisions/`](docs/decisions/)                 | Architecture Decision Records (ADRs)                               |
+| [`project-product-specification.md`](docs/project-product-specification.md) | Product requirements and project specification |
+| [`student-pre-project-planning-template.md`](docs/student-pre-project-planning-template.md) | Detailed day-by-day execution plan and checkpoints |
 | `security.md`                              | **Not yet created.** Added once concrete security implementation exists to document. |
 | `deployment.md`                            | **Not yet created.** Deployment is optional/P2 scope; added only if attempted. |
 
@@ -873,7 +863,7 @@ For deployment information, see `deployment.md`. **Not yet created** — added o
 
 ## Known Limitations / Production Gaps
 
-This project is primarily a demonstration and educational project rather than a production industrial control system. The summary below is a snapshot — see [`known-limitations.md`](known-limitations.md) for the complete, maintained list.
+This project is primarily a demonstration and educational project rather than a production industrial control system. The summary below is a snapshot — see [`known-limitations.md`](docs/known-limitations.md) for the complete, maintained list.
 
 Known limitations include:
 
