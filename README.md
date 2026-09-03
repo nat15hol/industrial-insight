@@ -3,7 +3,7 @@
 ![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet&logoColor=white)
 ![React](https://img.shields.io/badge/React-TypeScript-61DAFB?logo=react&logoColor=white)
 ![SQL Server](https://img.shields.io/badge/SQL_Server-EF_Core-CC2927?logo=microsoftsqlserver&logoColor=white)
-![Status](https://img.shields.io/badge/status-presentation_ready)
+![Status](https://img.shields.io/badge/status-presentation%20ready-brightgreen)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 **A maintenance prioritization platform for industrial operations**
