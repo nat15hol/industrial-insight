@@ -42,6 +42,10 @@ Example entry format:
 
 - **[Feature/area]** — [what is missing or incomplete] — [why it was deprioritized] — [workaround/impact, if any].
 
+Entries:
+
+- **Demo fallback data** — no dedicated seed/backup dataset was prepared for the live demo (per issue #75). The presentation relied on data accumulated during development/testing instead, which was sufficient on the day. No impact on the delivered presentation; noted here as a gap against the original plan.
+
 ## Security & Deployment
 
 Detailed security and deployment documentation (`security.md`, `deployment.md`) are added once there is concrete implementation to document, consistent with the project's stability-first approach — no placeholder documentation is maintained for features not yet built. Until then:
