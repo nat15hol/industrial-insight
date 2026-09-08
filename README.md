@@ -70,7 +70,7 @@ The AI-assisted incident assessment is an optional decision-support layer and is
 
 ## Project Status
 
-**Current status:** Final stabilization and presentation preparation. The core MVP is implemented and validated through backend testing, data-pipeline validation, AI fallback testing, and frontend integration. Final work is focused on stabilization, documentation, and presentation readiness.
+**Current status:** Presentation completed. The core MVP is implemented and validated through backend testing, data-pipeline validation, AI fallback testing, and frontend integration.
 
 **Live status:** for up-to-date issue counts, milestone progress, and
 scope tracking, run the project dashboard locally:
@@ -668,7 +668,7 @@ If an external AI provider is used, its API key must be configured through User 
 
 Secrets and API keys must never be committed to source control.
 
-For security-related guidance, see `security.md`. **Not yet created** — will be added once concrete security implementation exists to document (see [`known-limitations.md`](docs/known-limitations.md)). In the meantime, baseline security measures are described in [`architecture.md`](docs/architecture.md).
+For security-related guidance, see the Security Model section in [`architecture.md`](docs/architecture.md), which documents the project's authentication, authorization, input validation, and error-handling security measures. A separate security.md document is not included in the current project scope.
 
 ## Running the Application
 
@@ -694,23 +694,22 @@ If the optional AI functionality is implemented, it can run through a local mock
 
 ## Testing
 
-The project uses automated backend tests with xUnit (.NET) for critical functionality.
+The project uses automated backend tests with xUnit (.NET) for selected critical backend scenarios.
 
 Critical test areas include:
 
 - Authentication
 - RBAC denial
 - Incident creation
-- AI success scenario, if AI functionality is implemented
-- AI service failure fallback, if AI functionality is implemented
-- AI malformed-response/schema-validation fallback, if AI functionality is implemented
+- AI suggestion success scenario (using a mocked AI service)
+- AI service failure fallback
+- Invalid AI suggestion handling
 - Pipeline validation
 - Duplicate handling
 - Data-quality rules
 - Database relationships
-- Clean setup/restart verification
 
-The core incident workflow must be tested independently of AI availability.
+The test suite verifies that incident creation succeeds even when the AI service fails.
 
 Run the tests according to the commands documented in:
 
