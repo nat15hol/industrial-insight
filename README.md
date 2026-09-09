@@ -3,7 +3,7 @@
 ![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet&logoColor=white)
 ![React](https://img.shields.io/badge/React-TypeScript-61DAFB?logo=react&logoColor=white)
 ![SQL Server](https://img.shields.io/badge/SQL_Server-EF_Core-CC2927?logo=microsoftsqlserver&logoColor=white)
-![Status](https://img.shields.io/badge/status-presentation%20ready-brightgreen)
+![Status](https://img.shields.io/badge/status-presented-brightgreen)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 **A maintenance prioritization platform for industrial operations**
@@ -156,8 +156,8 @@ Each machine is assigned a transparent Machine Priority Score based on:
 Example:
 
 ```text
-Machine A — Machine Priority Score 82/100 — HIGH
-3 unresolved incidents · recurring issue
+Machine A — Machine Priority Score 84/100 — HIGH
+3 open incidents · open High-priority incident · recurring issue
 Recommended action: Inspect bearing assembly
 [Create maintenance task]
 ```
@@ -180,11 +180,7 @@ AI output is treated as **untrusted external input** and is validated against a 
 
 The AI service must never be a dependency for the core workflow. If it is unavailable, disabled, or returns an invalid response, the incident can still be created and prioritized manually.
 
-The AI functionality can be implemented using:
-
-- A local mock AI service for development and demonstration
-- A local open-source model, if available
-- An optional external AI provider such as OpenAI or Anthropic
+The current implementation uses a local mock AI service (`MockIncidentAiService`) based on keyword matching — no local open-source model or external AI provider is currently integrated. The application is structured behind an `IIncidentAiService` abstraction so a real provider could be added later without changing the core incident workflow.
 
 **No paid AI service is required to run or demonstrate the core application.**
 
@@ -226,7 +222,7 @@ The pipeline distinguishes between:
 
 The dashboard provides operational KPIs based on persisted database data, including the per-machine Priority Score described above.
 
-Planned/implemented metrics include:
+Implemented metrics include:
 
 - Total machines
 - Open incidents
@@ -321,13 +317,9 @@ The AI-assisted incident assessment is an optional P1 feature.
 
 The application is designed so that the AI provider can be replaced without changing the core incident workflow.
 
-Possible implementations include:
+The current implementation is a local mock AI service using keyword matching. No local open-source model or external AI provider is integrated today; the `IIncidentAiService` abstraction allows one to be added later without changing the core incident workflow.
 
-- Local mock AI service
-- Local open-source AI model
-- Optional external AI provider such as Anthropic or OpenAI
-
-All AI responses are validated through C# validation before being used by the application.
+**All AI responses are validated through C# validation before being used by the application.**
 
 A paid external AI API is **not required** for the core project.
 
@@ -707,7 +699,6 @@ Critical test areas include:
 - Pipeline validation
 - Duplicate handling
 - Data-quality rules
-- Database relationships
 
 The test suite verifies that incident creation succeeds even when the AI service fails.
 
@@ -729,7 +720,7 @@ Security considerations include:
 
 The AI service, when enabled, is treated as an untrusted external dependency. AI output is validated before being used by the application.
 
-For more information, see `security.md`. **Not yet created** — added once concrete security implementation exists to document. In the meantime, see [`architecture.md`](docs/architecture.md) for the baseline security model and [`known-limitations.md`](docs/known-limitations.md) for current status.
+For more information, see the Security Model section in [`architecture.md`](docs/architecture.md), which documents the project's authentication, authorization, input validation, and error-handling security measures. A separate `security.md` document is not included in the current project scope.
 
 ## Documentation
 
@@ -737,7 +728,7 @@ The repository contains additional documentation for different aspects of the pr
 
 | **Document**                              | **Description**                                                   |
 | ------------------------------------------ | ------------------------------------------------------------------ |
-| [`architecture.md`](docs/architecture.md)       | System architecture and technical design                          |
+| [`architecture.md`](docs/architecture.md)       | system architecture and technical design, including the project's security model                          |
 | [`api-contract.md`](docs/api-contract.md)       | REST API contract and endpoint expectations                       |
 | [`database.md`](docs/database.md)               | Database structure, relationships and persistence                 |
 | [`erd.md`](docs/erd.md)                         | Entity relationship diagram                                       |
@@ -751,8 +742,6 @@ The repository contains additional documentation for different aspects of the pr
 | [`decisions/`](docs/decisions/)                 | Architecture Decision Records (ADRs)                               |
 | [`project-product-specification.md`](docs/project-product-specification.md) | Product requirements and project specification |
 | [`student-pre-project-planning-template.md`](docs/student-pre-project-planning-template.md) | Detailed day-by-day execution plan and checkpoints |
-| `security.md`                              | **Not yet created.** Added once concrete security implementation exists to document. |
-| `deployment.md`                            | **Not yet created.** Deployment is optional/P2 scope; added only if attempted. |
 
 ## Project Scope
 
@@ -852,13 +841,13 @@ The system must remain fully functional without an external AI service.
 
 ## Deployment
 
-Deployment is optional and outside the core project scope.
+Deployment was included as a P2 bonus item in the planned project scope, but was not implemented during the project development period.
 
-If deployment is attempted, it should only be done after the core system is stable.
+If deployment is attempted in a future continuation of the project, it should only be done after the core system is stable.
 
-Docker Compose is considered a P2 bonus feature and must not displace core functionality, testing, stabilization or presentation readiness.
+Docker Compose was considered a P2 bonus feature and was not intended to displace core functionality, testing, stabilization, or presentation readiness.
 
-For deployment information, see `deployment.md`. **Not yet created** — added only if deployment is actually attempted, consistent with its P2/bonus status.
+Deployment documentation is therefore not included in the current repository.
 
 ## Known Limitations / Production Gaps
 
@@ -871,10 +860,10 @@ Known limitations include:
 - Cloud-based telemetry ingestion is outside the core scope.
 - Real external industrial datasets are outside the core scope.
 - Production-scale infrastructure is outside the core scope.
-- Advanced anomaly detection is optional.
+- Anomaly detection logic (±2 SD per measurement) was implemented and covered by automated tests as a P1.5 stretch goal, but is not wired into the running API — no endpoint or workflow currently calls it.
 - Scheduled pipeline execution is optional.
 - Additional observability is optional.
-- CI is optional.
+- GitHub Actions CI runs build verification on every push/PR; it does not run the automated test suite or deploy.
 - Docker Compose is a bonus feature.
 - The AI-assisted incident assessment is optional and may be implemented as a local mock, local model, or external AI integration depending on available development time and resources.
 
