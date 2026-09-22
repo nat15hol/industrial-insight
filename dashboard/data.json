@@ -462,11 +462,11 @@
       },
       "open_issues": 0,
       "closed_issues": 6,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:01:14Z",
-      "updated_at": "2026-08-22T07:54:47Z",
+      "updated_at": "2026-09-22T05:47:22Z",
       "due_on": "2026-08-18T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:22Z"
     },
     "comments": 1,
     "created_at": "2026-08-21T13:00:07Z",
@@ -6116,11 +6116,11 @@
       },
       "open_issues": 0,
       "closed_issues": 3,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:02:52Z",
-      "updated_at": "2026-08-21T10:27:39Z",
+      "updated_at": "2026-09-22T05:47:06Z",
       "due_on": "2026-08-21T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:06Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:36Z",
@@ -6270,11 +6270,11 @@
       },
       "open_issues": 0,
       "closed_issues": 3,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:02:52Z",
-      "updated_at": "2026-08-21T10:27:39Z",
+      "updated_at": "2026-09-22T05:47:06Z",
       "due_on": "2026-08-21T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:06Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:35Z",
@@ -6424,11 +6424,11 @@
       },
       "open_issues": 0,
       "closed_issues": 3,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:02:52Z",
-      "updated_at": "2026-08-21T10:27:39Z",
+      "updated_at": "2026-09-22T05:47:06Z",
       "due_on": "2026-08-21T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:06Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:33Z",
@@ -6578,11 +6578,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:02:19Z",
-      "updated_at": "2026-08-20T21:35:48Z",
+      "updated_at": "2026-09-22T05:47:12Z",
       "due_on": "2026-08-20T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:12Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:31Z",
@@ -6732,11 +6732,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:02:19Z",
-      "updated_at": "2026-08-20T21:35:48Z",
+      "updated_at": "2026-09-22T05:47:12Z",
       "due_on": "2026-08-20T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:12Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:29Z",
@@ -6886,11 +6886,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:02:19Z",
-      "updated_at": "2026-08-20T21:35:48Z",
+      "updated_at": "2026-09-22T05:47:12Z",
       "due_on": "2026-08-20T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:12Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:27Z",
@@ -7040,11 +7040,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:02:19Z",
-      "updated_at": "2026-08-20T21:35:48Z",
+      "updated_at": "2026-09-22T05:47:12Z",
       "due_on": "2026-08-20T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:12Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:25Z",
@@ -7194,11 +7194,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:01:47Z",
-      "updated_at": "2026-08-19T20:55:59Z",
+      "updated_at": "2026-09-22T05:47:17Z",
       "due_on": "2026-08-19T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:17Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:23Z",
@@ -7359,11 +7359,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:01:47Z",
-      "updated_at": "2026-08-19T20:55:59Z",
+      "updated_at": "2026-09-22T05:47:17Z",
       "due_on": "2026-08-19T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:17Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:20Z",
@@ -7513,11 +7513,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:01:47Z",
-      "updated_at": "2026-08-19T20:55:59Z",
+      "updated_at": "2026-09-22T05:47:17Z",
       "due_on": "2026-08-19T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:17Z"
     },
     "comments": 2,
     "created_at": "2026-08-14T21:24:18Z",
@@ -7667,11 +7667,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:01:47Z",
-      "updated_at": "2026-08-19T20:55:59Z",
+      "updated_at": "2026-09-22T05:47:17Z",
       "due_on": "2026-08-19T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:17Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:16Z",
@@ -7821,11 +7821,11 @@
       },
       "open_issues": 0,
       "closed_issues": 6,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:01:14Z",
-      "updated_at": "2026-08-22T07:54:47Z",
+      "updated_at": "2026-09-22T05:47:22Z",
       "due_on": "2026-08-18T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:22Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:14Z",
@@ -7975,11 +7975,11 @@
       },
       "open_issues": 0,
       "closed_issues": 6,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:01:14Z",
-      "updated_at": "2026-08-22T07:54:47Z",
+      "updated_at": "2026-09-22T05:47:22Z",
       "due_on": "2026-08-18T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:22Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:12Z",
@@ -8129,11 +8129,11 @@
       },
       "open_issues": 0,
       "closed_issues": 6,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:01:14Z",
-      "updated_at": "2026-08-22T07:54:47Z",
+      "updated_at": "2026-09-22T05:47:22Z",
       "due_on": "2026-08-18T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:22Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:10Z",
@@ -8283,11 +8283,11 @@
       },
       "open_issues": 0,
       "closed_issues": 6,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:01:14Z",
-      "updated_at": "2026-08-22T07:54:47Z",
+      "updated_at": "2026-09-22T05:47:22Z",
       "due_on": "2026-08-18T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:22Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:24:08Z",
@@ -11385,11 +11385,11 @@
       },
       "open_issues": 0,
       "closed_issues": 6,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:01:14Z",
-      "updated_at": "2026-08-22T07:54:47Z",
+      "updated_at": "2026-09-22T05:47:22Z",
       "due_on": "2026-08-18T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:47:22Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:15:49Z",
