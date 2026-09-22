@@ -39,7 +39,9 @@
         "name": "enhancement",
         "color": "a2eeef",
         "default": true,
-        "description": "New feature or request"
+        "description": "New feature or request",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465563,
@@ -48,7 +50,9 @@
         "name": "feature-machines",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -57,7 +61,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -117,11 +123,11 @@
       },
       "open_issues": 0,
       "closed_issues": 8,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:09:09Z",
-      "updated_at": "2026-09-02T19:04:50Z",
+      "updated_at": "2026-09-22T05:46:12Z",
       "due_on": "2026-09-01T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:12Z"
     },
     "comments": 1,
     "created_at": "2026-09-01T08:36:14Z",
@@ -240,7 +246,9 @@
         "name": "bug",
         "color": "d73a4a",
         "default": true,
-        "description": "Something isn't working"
+        "description": "Something isn't working",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -249,7 +257,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -390,7 +400,9 @@
         "name": "bug",
         "color": "d73a4a",
         "default": true,
-        "description": "Something isn't working"
+        "description": "Something isn't working",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -399,7 +411,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11909159817,
@@ -408,7 +422,9 @@
         "name": "authentication",
         "color": "aaaaaa",
         "default": false,
-        "description": null
+        "description": null,
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -549,7 +565,9 @@
         "name": "testing",
         "color": "bfdadc",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836636790,
@@ -558,7 +576,9 @@
         "name": "docs",
         "color": "0075ca",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -596,11 +616,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:10:38Z",
-      "updated_at": "2026-09-08T19:17:56Z",
+      "updated_at": "2026-09-22T05:45:59Z",
       "due_on": "2026-09-03T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:45:59Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:25:51Z",
@@ -699,7 +719,9 @@
         "name": "docs",
         "color": "0075ca",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -737,11 +759,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:10:38Z",
-      "updated_at": "2026-09-08T19:17:56Z",
+      "updated_at": "2026-09-22T05:45:59Z",
       "due_on": "2026-09-03T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:45:59Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:25:49Z",
@@ -840,7 +862,9 @@
         "name": "docs",
         "color": "0075ca",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -878,11 +902,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:10:38Z",
-      "updated_at": "2026-09-08T19:17:56Z",
+      "updated_at": "2026-09-22T05:45:59Z",
       "due_on": "2026-09-03T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:45:59Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:25:47Z",
@@ -981,7 +1005,9 @@
         "name": "feature-dashboard",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633115,
@@ -990,7 +1016,9 @@
         "name": "frontend",
         "color": "1d76db",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -1028,11 +1056,11 @@
       },
       "open_issues": 0,
       "closed_issues": 8,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:09:09Z",
-      "updated_at": "2026-09-02T19:04:50Z",
+      "updated_at": "2026-09-22T05:46:12Z",
       "due_on": "2026-09-01T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:12Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:25:45Z",
@@ -1131,7 +1159,9 @@
         "name": "feature-dashboard",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -1140,7 +1170,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -1178,11 +1210,11 @@
       },
       "open_issues": 0,
       "closed_issues": 8,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:09:09Z",
-      "updated_at": "2026-09-02T19:04:50Z",
+      "updated_at": "2026-09-22T05:46:12Z",
       "due_on": "2026-09-01T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:12Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:25:43Z",
@@ -1281,7 +1313,9 @@
         "name": "feature-dashboard",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -1290,7 +1324,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -1328,11 +1364,11 @@
       },
       "open_issues": 0,
       "closed_issues": 8,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:09:09Z",
-      "updated_at": "2026-09-02T19:04:50Z",
+      "updated_at": "2026-09-22T05:46:12Z",
       "due_on": "2026-09-01T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:12Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:25:41Z",
@@ -1431,7 +1467,9 @@
         "name": "feature-dashboard",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -1440,7 +1478,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -1478,11 +1518,11 @@
       },
       "open_issues": 0,
       "closed_issues": 8,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:09:09Z",
-      "updated_at": "2026-09-02T19:04:50Z",
+      "updated_at": "2026-09-22T05:46:12Z",
       "due_on": "2026-09-01T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:12Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:25:38Z",
@@ -1581,7 +1621,9 @@
         "name": "feature-dashboard",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -1590,7 +1632,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -1628,11 +1672,11 @@
       },
       "open_issues": 0,
       "closed_issues": 8,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:09:09Z",
-      "updated_at": "2026-09-02T19:04:50Z",
+      "updated_at": "2026-09-22T05:46:12Z",
       "due_on": "2026-09-01T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:12Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:25:37Z",
@@ -1731,7 +1775,9 @@
         "name": "feature-dashboard",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -1740,7 +1786,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -1778,11 +1826,11 @@
       },
       "open_issues": 0,
       "closed_issues": 8,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:09:09Z",
-      "updated_at": "2026-09-02T19:04:50Z",
+      "updated_at": "2026-09-22T05:46:12Z",
       "due_on": "2026-09-01T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:12Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:25:35Z",
@@ -1881,7 +1929,9 @@
         "name": "feature-dashboard",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -1890,7 +1940,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -1928,11 +1980,11 @@
       },
       "open_issues": 0,
       "closed_issues": 8,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:09:09Z",
-      "updated_at": "2026-09-02T19:04:50Z",
+      "updated_at": "2026-09-22T05:46:12Z",
       "due_on": "2026-09-01T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:12Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:25:32Z",
@@ -2031,7 +2083,9 @@
         "name": "feature-dashboard",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -2040,7 +2094,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -2181,7 +2237,9 @@
         "name": "feature-dashboard",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -2190,7 +2248,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -2331,7 +2391,9 @@
         "name": "database",
         "color": "5319e7",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465862,
@@ -2340,7 +2402,9 @@
         "name": "feature-pipeline",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -2349,7 +2413,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -2490,7 +2556,9 @@
         "name": "feature-pipeline",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -2499,7 +2567,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -2640,7 +2710,9 @@
         "name": "feature-pipeline",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -2649,7 +2721,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -2790,7 +2864,9 @@
         "name": "feature-pipeline",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -2799,7 +2875,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -2940,7 +3018,9 @@
         "name": "feature-pipeline",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -2949,7 +3029,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -3090,7 +3172,9 @@
         "name": "feature-pipeline",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -3099,7 +3183,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -3240,7 +3326,9 @@
         "name": "feature-ai",
         "color": "e99695",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836466600,
@@ -3249,7 +3337,9 @@
         "name": "stretch",
         "color": "d4c5f9",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -3258,7 +3348,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -3399,7 +3491,9 @@
         "name": "feature-ai",
         "color": "e99695",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836466600,
@@ -3408,7 +3502,9 @@
         "name": "stretch",
         "color": "d4c5f9",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -3417,7 +3513,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -3558,7 +3656,9 @@
         "name": "feature-ai",
         "color": "e99695",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836466600,
@@ -3567,7 +3667,9 @@
         "name": "stretch",
         "color": "d4c5f9",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -3576,7 +3678,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -3717,7 +3821,9 @@
         "name": "feature-ai",
         "color": "e99695",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836466600,
@@ -3726,7 +3832,9 @@
         "name": "stretch",
         "color": "d4c5f9",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -3735,7 +3843,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -3876,7 +3986,9 @@
         "name": "feature-tasks",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633115,
@@ -3885,7 +3997,9 @@
         "name": "frontend",
         "color": "1d76db",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -4026,7 +4140,9 @@
         "name": "feature-tasks",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -4035,7 +4151,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -4176,7 +4294,9 @@
         "name": "auth",
         "color": "d93f0b",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465694,
@@ -4185,7 +4305,9 @@
         "name": "feature-tasks",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -4194,7 +4316,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -4335,7 +4459,9 @@
         "name": "feature-tasks",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -4344,7 +4470,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -4485,7 +4613,9 @@
         "name": "database",
         "color": "5319e7",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465694,
@@ -4494,7 +4624,9 @@
         "name": "feature-tasks",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -4503,7 +4635,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -4644,7 +4778,9 @@
         "name": "feature-incidents",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836466034,
@@ -4653,7 +4789,9 @@
         "name": "polish",
         "color": "c2e0c6",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633115,
@@ -4662,7 +4800,9 @@
         "name": "frontend",
         "color": "1d76db",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -4803,7 +4943,9 @@
         "name": "feature-incidents",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633115,
@@ -4812,7 +4954,9 @@
         "name": "frontend",
         "color": "1d76db",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -4953,7 +5097,9 @@
         "name": "feature-incidents",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633115,
@@ -4962,7 +5108,9 @@
         "name": "frontend",
         "color": "1d76db",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -5103,7 +5251,9 @@
         "name": "auth",
         "color": "d93f0b",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465592,
@@ -5112,7 +5262,9 @@
         "name": "feature-incidents",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -5121,7 +5273,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -5262,7 +5416,9 @@
         "name": "feature-incidents",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -5271,7 +5427,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -5412,7 +5570,9 @@
         "name": "feature-incidents",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -5421,7 +5581,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -5562,7 +5724,9 @@
         "name": "database",
         "color": "5319e7",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465592,
@@ -5571,7 +5735,9 @@
         "name": "feature-incidents",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -5580,7 +5746,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -5721,7 +5889,9 @@
         "name": "polish",
         "color": "c2e0c6",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633115,
@@ -5730,7 +5900,9 @@
         "name": "frontend",
         "color": "1d76db",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -5739,7 +5911,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -5880,7 +6054,9 @@
         "name": "feature-machines",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836466034,
@@ -5889,7 +6065,9 @@
         "name": "polish",
         "color": "c2e0c6",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633115,
@@ -5898,7 +6076,9 @@
         "name": "frontend",
         "color": "1d76db",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -6039,7 +6219,9 @@
         "name": "feature-machines",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633115,
@@ -6048,7 +6230,9 @@
         "name": "frontend",
         "color": "1d76db",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -6189,7 +6373,9 @@
         "name": "feature-machines",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633115,
@@ -6198,7 +6384,9 @@
         "name": "frontend",
         "color": "1d76db",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -6339,7 +6527,9 @@
         "name": "auth",
         "color": "d93f0b",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633115,
@@ -6348,7 +6538,9 @@
         "name": "frontend",
         "color": "1d76db",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -6489,7 +6681,9 @@
         "name": "auth",
         "color": "d93f0b",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633115,
@@ -6498,7 +6692,9 @@
         "name": "frontend",
         "color": "1d76db",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -6639,7 +6835,9 @@
         "name": "setup",
         "color": "c5def5",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633115,
@@ -6648,7 +6846,9 @@
         "name": "frontend",
         "color": "1d76db",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -6789,7 +6989,9 @@
         "name": "setup",
         "color": "c5def5",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633115,
@@ -6798,7 +7000,9 @@
         "name": "frontend",
         "color": "1d76db",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -6939,7 +7143,9 @@
         "name": "feature-machines",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -6948,7 +7154,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -7089,7 +7297,9 @@
         "name": "database",
         "color": "5319e7",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465563,
@@ -7098,7 +7308,9 @@
         "name": "feature-machines",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -7107,7 +7319,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -7248,7 +7462,9 @@
         "name": "feature-machines",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -7257,7 +7473,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -7398,7 +7616,9 @@
         "name": "auth",
         "color": "d93f0b",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -7407,7 +7627,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -7548,7 +7770,9 @@
         "name": "auth",
         "color": "d93f0b",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -7557,7 +7781,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -7698,7 +7924,9 @@
         "name": "auth",
         "color": "d93f0b",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -7707,7 +7935,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -7848,7 +8078,9 @@
         "name": "auth",
         "color": "d93f0b",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -7857,7 +8089,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -7998,7 +8232,9 @@
         "name": "auth",
         "color": "d93f0b",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -8007,7 +8243,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -8148,7 +8386,9 @@
         "name": "database",
         "color": "5319e7",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -8157,7 +8397,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -8298,7 +8540,9 @@
         "name": "setup",
         "color": "c5def5",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465472,
@@ -8307,7 +8551,9 @@
         "name": "database",
         "color": "5319e7",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836633698,
@@ -8316,7 +8562,9 @@
         "name": "backend",
         "color": "0e8a16",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -8457,7 +8705,9 @@
         "name": "bug",
         "color": "d73a4a",
         "default": true,
-        "description": "Something isn't working"
+        "description": "Something isn't working",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836466034,
@@ -8466,7 +8716,9 @@
         "name": "polish",
         "color": "c2e0c6",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -8504,11 +8756,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:10:38Z",
-      "updated_at": "2026-09-08T19:17:56Z",
+      "updated_at": "2026-09-22T05:45:59Z",
       "due_on": "2026-09-03T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:45:59Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:17:16Z",
@@ -8607,7 +8859,9 @@
         "name": "feature-pipeline",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836466600,
@@ -8616,7 +8870,9 @@
         "name": "stretch",
         "color": "d4c5f9",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -8654,11 +8910,11 @@
       },
       "open_issues": 0,
       "closed_issues": 5,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:09:57Z",
-      "updated_at": "2026-09-02T23:13:47Z",
+      "updated_at": "2026-09-22T05:46:06Z",
       "due_on": "2026-09-02T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:06Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:17:14Z",
@@ -8757,7 +9013,9 @@
         "name": "feature-ai",
         "color": "e99695",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465977,
@@ -8766,7 +9024,9 @@
         "name": "testing",
         "color": "bfdadc",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -8804,11 +9064,11 @@
       },
       "open_issues": 0,
       "closed_issues": 5,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:09:57Z",
-      "updated_at": "2026-09-02T23:13:47Z",
+      "updated_at": "2026-09-22T05:46:06Z",
       "due_on": "2026-09-02T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:06Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:17:13Z",
@@ -8907,7 +9167,9 @@
         "name": "database",
         "color": "5319e7",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465862,
@@ -8916,7 +9178,9 @@
         "name": "feature-pipeline",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465977,
@@ -8925,7 +9189,9 @@
         "name": "testing",
         "color": "bfdadc",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -8963,11 +9229,11 @@
       },
       "open_issues": 0,
       "closed_issues": 5,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:09:57Z",
-      "updated_at": "2026-09-02T23:13:47Z",
+      "updated_at": "2026-09-22T05:46:06Z",
       "due_on": "2026-09-02T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:06Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:17:10Z",
@@ -9066,7 +9332,9 @@
         "name": "feature-incidents",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465862,
@@ -9075,7 +9343,9 @@
         "name": "feature-pipeline",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465977,
@@ -9084,7 +9354,9 @@
         "name": "testing",
         "color": "bfdadc",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -9122,11 +9394,11 @@
       },
       "open_issues": 0,
       "closed_issues": 5,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:09:57Z",
-      "updated_at": "2026-09-02T23:13:47Z",
+      "updated_at": "2026-09-22T05:46:06Z",
       "due_on": "2026-09-02T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:06Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:17:09Z",
@@ -9225,7 +9497,9 @@
         "name": "auth",
         "color": "d93f0b",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465977,
@@ -9234,7 +9508,9 @@
         "name": "testing",
         "color": "bfdadc",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -9272,11 +9548,11 @@
       },
       "open_issues": 0,
       "closed_issues": 5,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:09:57Z",
-      "updated_at": "2026-09-02T23:13:47Z",
+      "updated_at": "2026-09-22T05:46:06Z",
       "due_on": "2026-09-02T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:06Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:17:06Z",
@@ -9375,7 +9651,9 @@
         "name": "feature-ai",
         "color": "e99695",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465977,
@@ -9384,7 +9662,9 @@
         "name": "testing",
         "color": "bfdadc",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -9422,11 +9702,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:08:27Z",
-      "updated_at": "2026-09-02T14:19:05Z",
+      "updated_at": "2026-09-22T05:46:17Z",
       "due_on": "2026-08-31T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:17Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:16:56Z",
@@ -9525,7 +9805,9 @@
         "name": "bug",
         "color": "d73a4a",
         "default": true,
-        "description": "Something isn't working"
+        "description": "Something isn't working",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836466034,
@@ -9534,7 +9816,9 @@
         "name": "polish",
         "color": "c2e0c6",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -9572,11 +9856,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:08:27Z",
-      "updated_at": "2026-09-02T14:19:05Z",
+      "updated_at": "2026-09-22T05:46:17Z",
       "due_on": "2026-08-31T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:17Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:16:54Z",
@@ -9675,7 +9959,9 @@
         "name": "database",
         "color": "5319e7",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465862,
@@ -9684,7 +9970,9 @@
         "name": "feature-pipeline",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465977,
@@ -9693,7 +9981,9 @@
         "name": "testing",
         "color": "bfdadc",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -9731,11 +10021,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:08:27Z",
-      "updated_at": "2026-09-02T14:19:05Z",
+      "updated_at": "2026-09-22T05:46:17Z",
       "due_on": "2026-08-31T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:17Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:16:52Z",
@@ -9834,7 +10124,9 @@
         "name": "auth",
         "color": "d93f0b",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465977,
@@ -9843,7 +10135,9 @@
         "name": "testing",
         "color": "bfdadc",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -9881,11 +10175,11 @@
       },
       "open_issues": 0,
       "closed_issues": 4,
-      "state": "open",
+      "state": "closed",
       "created_at": "2026-08-14T21:08:27Z",
-      "updated_at": "2026-09-02T14:19:05Z",
+      "updated_at": "2026-09-22T05:46:17Z",
       "due_on": "2026-08-31T00:00:00Z",
-      "closed_at": null
+      "closed_at": "2026-09-22T05:46:17Z"
     },
     "comments": 1,
     "created_at": "2026-08-14T21:16:50Z",
@@ -9984,7 +10278,9 @@
         "name": "feature-ai",
         "color": "e99695",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465977,
@@ -9993,7 +10289,9 @@
         "name": "testing",
         "color": "bfdadc",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836466000,
@@ -10002,7 +10300,9 @@
         "name": "checkpoint",
         "color": "b60205",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -10143,7 +10443,9 @@
         "name": "testing",
         "color": "bfdadc",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836466000,
@@ -10152,7 +10454,9 @@
         "name": "checkpoint",
         "color": "b60205",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -10293,7 +10597,9 @@
         "name": "testing",
         "color": "bfdadc",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836466000,
@@ -10302,7 +10608,9 @@
         "name": "checkpoint",
         "color": "b60205",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -10443,7 +10751,9 @@
         "name": "feature-pipeline",
         "color": "fbca04",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -10584,7 +10894,9 @@
         "name": "polish",
         "color": "c2e0c6",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -10725,7 +11037,9 @@
         "name": "polish",
         "color": "c2e0c6",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -10866,7 +11180,9 @@
         "name": "testing",
         "color": "bfdadc",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836466000,
@@ -10875,7 +11191,9 @@
         "name": "checkpoint",
         "color": "b60205",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -11016,7 +11334,9 @@
         "name": "database",
         "color": "5319e7",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465514,
@@ -11025,7 +11345,9 @@
         "name": "auth",
         "color": "d93f0b",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -11166,7 +11488,9 @@
         "name": "setup",
         "color": "c5def5",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465472,
@@ -11175,7 +11499,9 @@
         "name": "database",
         "color": "5319e7",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -11316,7 +11642,9 @@
         "name": "setup",
         "color": "c5def5",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836465472,
@@ -11325,7 +11653,9 @@
         "name": "database",
         "color": "5319e7",
         "default": false,
-        "description": ""
+        "description": "",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -11466,7 +11796,9 @@
         "name": "enhancement",
         "color": "a2eeef",
         "default": true,
-        "description": "New feature or request"
+        "description": "New feature or request",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836159830,
@@ -11475,7 +11807,9 @@
         "name": "dependencies",
         "color": "28aa20",
         "default": false,
-        "description": "External packages, libraries, and tool updates."
+        "description": "External packages, libraries, and tool updates.",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11836166439,
@@ -11484,7 +11818,9 @@
         "name": "chore",
         "color": "8dd5c8",
         "default": false,
-        "description": "Maintenance tasks, configurations, tooling, and general project setup."
+        "description": "Maintenance tasks, configurations, tooling, and general project setup.",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -11588,7 +11924,9 @@
         "name": "enhancement",
         "color": "a2eeef",
         "default": true,
-        "description": "New feature or request"
+        "description": "New feature or request",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
@@ -11692,7 +12030,9 @@
         "name": "documentation",
         "color": "0075ca",
         "default": true,
-        "description": "Improvements or additions to documentation"
+        "description": "Improvements or additions to documentation",
+        "archived_at": null,
+        "archived_by": null
       },
       {
         "id": 11833090849,
@@ -11701,7 +12041,9 @@
         "name": "enhancement",
         "color": "a2eeef",
         "default": true,
-        "description": "New feature or request"
+        "description": "New feature or request",
+        "archived_at": null,
+        "archived_by": null
       }
     ],
     "state": "closed",
